@@ -1,5 +1,0 @@
-C:\projetos\EntityFrameworkStudy\EntityFrameworkStudyLogic\bin\Debug\EntityFrameworkStudyLogic.dll
-C:\projetos\EntityFrameworkStudy\EntityFrameworkStudyLogic\bin\Debug\EntityFrameworkStudyLogic.pdb
-C:\projetos\EntityFrameworkStudy\EntityFrameworkStudyLogic\obj\Debug\EntityFrameworkStudyLogic.csproj.CoreCompileInputs.cache
-C:\projetos\EntityFrameworkStudy\EntityFrameworkStudyLogic\obj\Debug\EntityFrameworkStudyLogic.dll
-C:\projetos\EntityFrameworkStudy\EntityFrameworkStudyLogic\obj\Debug\EntityFrameworkStudyLogic.pdb

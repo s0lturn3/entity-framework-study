@@ -1,3 +1,6 @@
 **/packages/
 
+**/[Oo]bj/
+**/[Dd]ebug/
+
 *.env
