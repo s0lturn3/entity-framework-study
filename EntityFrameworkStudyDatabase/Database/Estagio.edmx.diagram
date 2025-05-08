@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bc3578c5b1564191a9cdb0544424a93d" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.EST_ANEXO_LANCAMENTO" Width="1.5" PointX="5.25" PointY="38.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_CATEGORIAPRODUTO" Width="1.5" PointX="0.75" PointY="26.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_CONTATO" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_ENDERECO" Width="1.5" PointX="8.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_HISTORICO_LANCAMENTO" Width="1.5" PointX="8.25" PointY="38.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_HISTORICO_PRECO" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_LANCAMENTO" Width="1.5" PointX="6" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_LOG_AUDITORIA" Width="1.5" PointX="5.25" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_PAPEL" Width="1.5" PointX="0.75" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_PESSOA" Width="1.5" PointX="3" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_PRODUTO" Width="1.5" PointX="3" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_PRODUTO_LANCTO" Width="1.5" PointX="8.25" PointY="23.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_SITUACAOLANCAMENTO" Width="1.5" PointX="3.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_TIPOENDERECO" Width="1.5" PointX="6" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_TIPOLANCAMENTO" Width="1.5" PointX="3.75" PointY="30.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_TIPOPESSOA" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.EST_UF" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAEMPRESA" Width="1.5" PointX="1.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAESTABELECIMENTO" Width="1.5" PointX="3.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAMNUMENU" Width="1.5" PointX="3" PointY="45.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAMNUMENUUSUARIO" Width="1.5" PointX="5.25" PointY="53.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAUSUARIO" Width="1.5" PointX="3" PointY="51.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAUSUARIOSENHASLOG" Width="1.5" PointX="5.25" PointY="57" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loc_Aluguel" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loc_Cliente" Width="1.5" PointX="3" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loc_EnderecoCliente" Width="1.5" PointX="5.25" PointY="43.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loc_Funcionario" Width="1.5" PointX="3" PointY="37" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loc_Marca" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loc_TipoVeiculo" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Loc_Veiculo" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OSSYS_TENANT" Width="1.5" PointX="0.75" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CRPGRUPO" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAAUTHENTICATION" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAEMAILCFG" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAGRUPO" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAIN2FATYPE" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAINAUTHTYPE" Width="1.5" PointX="9.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.InfraLogRecupSenha" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRASEGCONFIG" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAUSUARIO_IMG" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.INFRAUSUARIOLOG1" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__EST_ANEXO__LANCA__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_ANEXO__TENAN__41EDCAC5" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_ANEXO__USUAR__44CA3770" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_PRODU__CATEG__151B244E" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_CONTA__PESSO__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_ENDER__PESSO__282DF8C2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_ENDER__TIPOE__2A164134" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_ENDERECO__UF__29221CFB" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_HISTO__LANCA__498EEC8D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_HISTO__TENAN__489AC854" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_HISTO__USUAR__4B7734FF" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_HISTO__PRODU__3D2915A8" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_HISTO__TENAN__3C34F16F" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LANCA__ESTAB__2180FB33" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LANCA__PESSO__1DB06A4F" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LANCA__PESSO__245D67DE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LANCA__PESSO__25518C17" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LANCA__SITUA__1F98B2C1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LANCA__TENAN__1BC821DD" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LANCA__TIPOL__1CBC4616" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_PRODU__LANCA__11158940" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LOG_A__INFRA__395884C4" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_LOG_A__TENAN__37703C52" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_PESSO__PAPEL__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_PESSO__TENAN__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_PESSO__TIPOP__0A9D95DB" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_PRODU__PRODU__0F2D40CE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__EST_PRODU__TENAN__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FRK_INFRAUSUARIO_TENANT" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Cliente_Aluguel" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Funcionario_Aluguel" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Veiculo_Aluguel" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Endereco_Cliente" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Marca_Veiculo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Tipo_Veiculo" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

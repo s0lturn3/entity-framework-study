@@ -1,0 +1,3158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.CRPGRUPO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CRPGRUPO">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="IDCRPGRUPO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="IDCRPGRUPO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CODIGO" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ISGRUPOFINAL" Type="bit" />
+          <Property Name="NUMERONIVEL" Type="int" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_CATALOGO" Type="bit" />
+        </EntityType>
+        <EntityType Name="EST_ANEXO_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="ID_ANEXO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" Nullable="false" />
+          <Property Name="ID_ANEXO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LANCAMENTOID" Type="bigint" Nullable="false" />
+          <Property Name="NOMEARQUIVO" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ARQUIVO" Type="varbinary(max)" />
+          <Property Name="COMENTARIO" Type="varchar" MaxLength="255" />
+          <Property Name="DT_CRIACAO" Type="datetime" Nullable="false" />
+          <Property Name="USUARIOID" Type="nvarchar" MaxLength="36" />
+          <Property Name="IS_NFE" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_CATEGORIAPRODUTO">
+          <Key>
+            <PropertyRef Name="CD_CATEGORIAPRODUTO" />
+          </Key>
+          <Property Name="CD_CATEGORIAPRODUTO" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="TX_NOME" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EST_CONTATO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PESSOA_ID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TX_APELIDOCONTATO" Type="varchar" MaxLength="50" />
+          <Property Name="TX_EMAIL" Type="varchar" MaxLength="100" />
+          <Property Name="TX_TELEFONEFIXO" Type="varchar" MaxLength="20" />
+          <Property Name="TX_CELULAR" Type="varchar" MaxLength="20" />
+          <Property Name="TX_RAMAL" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="EST_ENDERECO">
+          <Key>
+            <PropertyRef Name="ID_ENDERECO" />
+          </Key>
+          <Property Name="ID_ENDERECO" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="PESSOA_ID" Type="varchar" MaxLength="36" />
+          <Property Name="LOGRADOURO" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="NUMERO" Type="int" />
+          <Property Name="COMPLEMENTO" Type="varchar" MaxLength="50" />
+          <Property Name="BAIRRO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CIDADE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CEP" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TIPOENDERECO_CD" Type="varchar" MaxLength="12" />
+          <Property Name="IS_PRINCIPAL" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_HISTORICO_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="ID_HISTORICO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" Nullable="false" />
+          <Property Name="ID_HISTORICO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LANCAMENTOID" Type="bigint" Nullable="false" />
+          <Property Name="TX_COMENTARIO" Type="varchar" MaxLength="255" />
+          <Property Name="TX_ACAO_EXECUTADA" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DT_ENVIO" Type="datetime" Nullable="false" />
+          <Property Name="USUARIOID" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="IS_ORIGEM_SISTEMA" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_HISTORICO_PRECO">
+          <Key>
+            <PropertyRef Name="ID_HISTORICO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" Nullable="false" />
+          <Property Name="ID_HISTORICO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUTO_ID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="DT_VIGENCIA" Type="datetime" />
+          <Property Name="VL_NOVOPRECO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="VL_PRECOANTERIOR" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPOLANCAMENTO_CD" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="PESSOA_ID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TX_CODIGOBARRAS" Type="varchar" MaxLength="128" />
+          <Property Name="SITUACAO_CD" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DT_LANCAMENTO" Type="datetime" />
+          <Property Name="VL_LANCAMENTO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DT_PAGAMENTO" Type="datetime" />
+          <Property Name="TX_DESCRICAO" Type="varchar" MaxLength="100" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="ESTABELECIMENTOID" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="VL_DESCONTO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="VL_IMPOSTO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="DT_VENCIMENTO" Type="datetime" Nullable="false" />
+          <Property Name="PESSOA_REMETENTE_ID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="PESSOA_DESTINATARIO_ID" Type="varchar" MaxLength="36" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_LOG_AUDITORIA">
+          <Key>
+            <PropertyRef Name="ID_LOG" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" Nullable="false" />
+          <Property Name="ID_LOG" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TX_TABELA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TX_ACAOREALIZADA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DT_ACAOREALIZADA" Type="datetime" Nullable="false" />
+          <Property Name="TX_DESCRICAODETALHADA" Type="varchar" MaxLength="255" />
+          <Property Name="INFRAUSUARIO_ID" Type="nvarchar" MaxLength="36" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_PAPEL">
+          <Key>
+            <PropertyRef Name="CD_PAPEL" />
+          </Key>
+          <Property Name="CD_PAPEL" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="TX_NOME" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_PESSOA">
+          <Key>
+            <PropertyRef Name="ID_PESSOA" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" Nullable="false" />
+          <Property Name="ID_PESSOA" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TX_NOMEPESSOA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TIPOPESSOA_CD" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="PAPEL_CD" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="TX_DOCUMENTO" Type="varchar" MaxLength="19" Nullable="false" />
+          <Property Name="DT_NASCIMENTO" Type="datetime" />
+          <Property Name="DT_FUNDACAO" Type="datetime" />
+          <Property Name="DT_INICIOVINCULO" Type="datetime" Nullable="false" />
+          <Property Name="DT_CRIACAO" Type="datetime" Nullable="false" />
+          <Property Name="DT_ULTIMAALTERACAO" Type="datetime" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="IS_ESTRANGEIRO" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_PRODUTO">
+          <Key>
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="TX_NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TX_DESCRICAO" Type="varchar" MaxLength="255" />
+          <Property Name="CATEGORIA_CD" Type="varchar" MaxLength="5" />
+          <Property Name="QT_MINIMA" Type="bigint" />
+          <Property Name="QT_ATUAL" Type="bigint" />
+          <Property Name="VL_PRECO_RECOMENDADO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+        </EntityType>
+        <EntityType Name="EST_PRODUTO_LANCTO">
+          <Key>
+            <PropertyRef Name="ID_PRODUTOLANCAMENTO" />
+          </Key>
+          <Property Name="ID_PRODUTOLANCAMENTO" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PRODUTO_ID" Type="varchar" MaxLength="36" Nullable="false" />
+          <Property Name="LANCAMENTO_ID" Type="bigint" Nullable="false" />
+          <Property Name="QT_PRODUTO" Type="bigint" Nullable="false" />
+          <Property Name="DT_PEDIDO" Type="datetime" Nullable="false" />
+          <Property Name="VL_TOTAL" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_SITUACAOLANCAMENTO">
+          <Key>
+            <PropertyRef Name="CD_SITUACAOLANCAMENTO" />
+          </Key>
+          <Property Name="CD_SITUACAOLANCAMENTO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TX_NOME" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EST_TIPOENDERECO">
+          <Key>
+            <PropertyRef Name="CD_TIPOENDERECO" />
+          </Key>
+          <Property Name="CD_TIPOENDERECO" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="TX_TIPOENDERECO" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_TIPOLANCAMENTO">
+          <Key>
+            <PropertyRef Name="CD_TIPO" />
+          </Key>
+          <Property Name="CD_TIPO" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="TX_TIPOLANCAMENTO" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EST_TIPOPESSOA">
+          <Key>
+            <PropertyRef Name="CD_TIPOPESSOA" />
+          </Key>
+          <Property Name="CD_TIPOPESSOA" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="TX_TIPOPESSOA" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="EST_UF">
+          <Key>
+            <PropertyRef Name="CD_UF" />
+          </Key>
+          <Property Name="CD_UF" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="TX_NOME" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRAAUTHENTICATION' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRAAUTHENTICATION">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INFRAINAUTHTYPEID" Type="bigint" />
+          <Property Name="IS_2FAENABLED" Type="bit" />
+          <Property Name="INFRAIN2FATYPEID" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRAEMAILCFG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRAEMAILCFG">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SMTPSERVER" Type="nvarchar" MaxLength="50" />
+          <Property Name="SMTPPORT" Type="int" />
+          <Property Name="TIMEOUT" Type="int" />
+          <Property Name="USERNAME" Type="nvarchar" MaxLength="60" />
+          <Property Name="PASSWORD" Type="nvarchar" MaxLength="500" />
+          <Property Name="NOMEREMET" Type="nvarchar" MaxLength="50" />
+          <Property Name="EMAILADRESS" Type="nvarchar" MaxLength="250" />
+          <Property Name="IS_SSL" Type="bit" />
+          <Property Name="IS_TLS" Type="bit" />
+          <Property Name="IS_AUTHENTICATED" Type="bit" />
+          <Property Name="CONFIRMLEIT" Type="bit" />
+          <Property Name="CONFIRMENTREG" Type="bit" />
+          <Property Name="IMAPSERVER" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMAPPORT" Type="int" />
+          <Property Name="INFRAESTABID" Type="nvarchar" MaxLength="36" />
+          <Property Name="PASSWORD_ANG" Type="nvarchar" MaxLength="1000" />
+          <Property Name="URLSERVIDOR" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="INFRAEMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="CODIGO" Type="nvarchar" MaxLength="50" />
+          <Property Name="NOME" Type="nvarchar" MaxLength="60" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+        </EntityType>
+        <EntityType Name="INFRAESTABELECIMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="NOMEEXIBICAO" Type="nvarchar" MaxLength="30" />
+          <Property Name="CODIGO" Type="nvarchar" MaxLength="50" />
+          <Property Name="RAZAOSOCIAL" Type="nvarchar" MaxLength="100" />
+          <Property Name="NOMEFANTASIA" Type="nvarchar" MaxLength="100" />
+          <Property Name="CNPJ" Type="nvarchar" MaxLength="14" />
+          <Property Name="IS_MATRIZ" Type="bit" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="EMPRESAID" Type="nvarchar" MaxLength="36" />
+          <Property Name="IDIOMAID" Type="int" />
+          <Property Name="AVISOINICIAL" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRAGRUPO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRAGRUPO">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="nvarchar" MaxLength="100" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRAIN2FATYPE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRAIN2FATYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="NOME" Type="nvarchar" MaxLength="200" />
+          <Property Name="CODIGO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ORDEM" Type="int" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRAINAUTHTYPE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRAINAUTHTYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="NOME" Type="nvarchar" MaxLength="200" />
+          <Property Name="CODIGO" Type="nvarchar" MaxLength="50" />
+          <Property Name="ORDEM" Type="int" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.InfraLogRecupSenha' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="InfraLogRecupSenha">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INFRAUSUARIOID" Type="nvarchar" MaxLength="36" />
+          <Property Name="GUID" Type="nvarchar" MaxLength="36" />
+          <Property Name="DTALTERACAO" Type="datetime" />
+          <Property Name="DTSOLICITACAO" Type="datetime" />
+          <Property Name="IS_EFETIVADO" Type="bit" />
+        </EntityType>
+        <EntityType Name="INFRAMNUMENU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UNICOID" Type="nvarchar" MaxLength="36" />
+          <Property Name="LABEL" Type="nvarchar" MaxLength="50" />
+          <Property Name="LABEL_ENGLISH" Type="nvarchar" MaxLength="50" />
+          <Property Name="LABEL_SPANISH" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRICAO" Type="nvarchar" MaxLength="500" />
+          <Property Name="DESCRICAO_ENGLISH" Type="nvarchar" MaxLength="500" />
+          <Property Name="DESCRICAO_SPANISH" Type="nvarchar" MaxLength="500" />
+          <Property Name="DATACREATE" Type="datetime" />
+          <Property Name="ORDER" Type="int" />
+          <Property Name="CLASSICON" Type="nvarchar" MaxLength="100" />
+          <Property Name="ISACTIVE" Type="bit" />
+          <Property Name="URLDASHBOARD" Type="nvarchar" MaxLength="200" />
+          <Property Name="URL" Type="nvarchar" MaxLength="120" />
+          <Property Name="TxModuloCod" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="INFRAMNUMENUUSUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USUARIOID" Type="nvarchar" MaxLength="36" />
+          <Property Name="MENUID" Type="bigint" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRASEGCONFIG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRASEGCONFIG">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IS_LETRASMAIUSCULAS" Type="bit" />
+          <Property Name="IS_NUMEROS" Type="bit" />
+          <Property Name="IS_CARACTERESESPECIAIS" Type="bit" />
+          <Property Name="QTNINATIVIDADE" Type="int" />
+          <Property Name="QTNTROCASENHA" Type="int" />
+          <Property Name="QTNTENTATIVA" Type="int" />
+          <Property Name="QTNREPETICAO" Type="int" />
+          <Property Name="QTNMINIMA" Type="int" />
+          <Property Name="IS_DROPSESSION" Type="bit" />
+          <Property Name="LEVEL" Type="int" />
+        </EntityType>
+        <EntityType Name="INFRAUSUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="bigint" />
+          <Property Name="ID" Type="nvarchar" MaxLength="36" Nullable="false" />
+          <Property Name="USUARIO" Type="nvarchar" MaxLength="100" />
+          <Property Name="SENHA" Type="nvarchar" MaxLength="500" />
+          <Property Name="NOME" Type="nvarchar" MaxLength="100" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="250" />
+          <Property Name="TELEFONE" Type="nvarchar" MaxLength="20" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="100" />
+          <Property Name="DATACRIACAO" Type="datetime" />
+          <Property Name="DATAULTIMOACESSO" Type="datetime" />
+          <Property Name="IS_BLOQUEADO" Type="bit" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="USEROUTSYSTEMSID" Type="int" />
+          <Property Name="IDIOMAID" Type="int" />
+          <Property Name="INFRACONFIGLDAP" Type="bigint" />
+          <Property Name="LASTLOGESTABID" Type="nvarchar" MaxLength="36" />
+          <Property Name="LASTLOGSPRINT" Type="nvarchar" MaxLength="50" />
+          <Property Name="READLASTSPRINT" Type="bit" />
+          <Property Name="USAERP" Type="bit" />
+          <Property Name="FORCE_PSWCHANGE" Type="bit" />
+          <Property Name="USACHAT" Type="bit" />
+          <Property Name="SENHAHASH512" Type="varchar" MaxLength="500" />
+          <Property Name="TxCPF" Type="varchar" MaxLength="11" />
+          <Property Name="DtHoraValidadeLogin" Type="datetime" />
+          <Property Name="Is_Externo" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRAUSUARIO_IMG' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRAUSUARIO_IMG">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMAGEM" Type="varbinary(max)" />
+          <Property Name="FILENAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="DATACRIACAO" Type="datetime" />
+          <Property Name="IS_ACTIVE" Type="bit" />
+          <Property Name="USUARIOID" Type="nvarchar" MaxLength="36" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SIS_ERPV6_ESTAGIO.dbo.INFRAUSUARIOLOG1' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="INFRAUSUARIOLOG1">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INFRAUSUARIOID" Type="nvarchar" MaxLength="36" />
+          <Property Name="DATETIME" Type="datetime" />
+        </EntityType>
+        <EntityType Name="INFRAUSUARIOSENHASLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SENHA" Type="nvarchar" MaxLength="500" />
+          <Property Name="INFRAUSUARIOID" Type="nvarchar" MaxLength="36" />
+          <Property Name="DATETIME" Type="datetime" />
+          <Property Name="IS_EFFECTIVE" Type="bit" />
+        </EntityType>
+        <EntityType Name="Loc_Aluguel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Loc_ClienteId" Type="bigint" Nullable="false" />
+          <Property Name="Loc_FuncionarioId" Type="bigint" Nullable="false" />
+          <Property Name="Loc_VeiculoId" Type="bigint" Nullable="false" />
+          <Property Name="DtRetirada" Type="date" Nullable="false" />
+          <Property Name="DtEntregaPrevista" Type="date" Nullable="false" />
+          <Property Name="DtEntregaEfetiva" Type="date" Nullable="false" />
+          <Property Name="ValorPrevisto" Type="decimal" Precision="37" Scale="2" />
+          <Property Name="ValorFinal" Type="decimal" Precision="37" Scale="2" Nullable="false" />
+          <Property Name="ValorMulta" Type="decimal" Precision="37" Scale="2" />
+          <Property Name="ValorDesconto" Type="decimal" Precision="37" Scale="2" />
+          <Property Name="Is_Encerrado" Type="bit" />
+        </EntityType>
+        <EntityType Name="Loc_Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="RG" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Telefone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Is_Especial" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loc_EnderecoCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Logradouro" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="Bairro" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Complemento" Type="varchar" MaxLength="250" />
+          <Property Name="Cidade" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EstadoUF" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CEP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Loc_ClienteId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loc_Funcionario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CPF" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Telefone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loc_Marca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loc_TipoVeiculo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Loc_Veiculo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="MarcaId" Type="bigint" Nullable="false" />
+          <Property Name="Ano" Type="int" Nullable="false" />
+          <Property Name="Cor" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Placa" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Quilometragem" Type="int" />
+          <Property Name="ValorDiaria" Type="decimal" Precision="37" Scale="2" Nullable="false" />
+          <Property Name="Is_Disponivel" Type="bit" />
+          <Property Name="TipoVeiculoId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="OSSYS_TENANT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Is_Active" Type="bit" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__EST_ANEXO__LANCA__42E1EEFE">
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="1" />
+          <End Role="EST_ANEXO_LANCAMENTO" Type="Self.EST_ANEXO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_LANCAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_ANEXO_LANCAMENTO">
+              <PropertyRef Name="LANCAMENTOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ANEXO__TENAN__41EDCAC5">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_ANEXO_LANCAMENTO" Type="Self.EST_ANEXO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_ANEXO_LANCAMENTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ANEXO__USUAR__44CA3770">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="0..1" />
+          <End Role="EST_ANEXO_LANCAMENTO" Type="Self.EST_ANEXO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_ANEXO_LANCAMENTO">
+              <PropertyRef Name="USUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_CONTA__PESSO__114A936A">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_CONTATO" Type="Self.EST_CONTATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_CONTATO">
+              <PropertyRef Name="PESSOA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ENDER__PESSO__282DF8C2">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="0..1" />
+          <End Role="EST_ENDERECO" Type="Self.EST_ENDERECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_ENDERECO">
+              <PropertyRef Name="PESSOA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ENDER__TIPOE__2A164134">
+          <End Role="EST_TIPOENDERECO" Type="Self.EST_TIPOENDERECO" Multiplicity="0..1" />
+          <End Role="EST_ENDERECO" Type="Self.EST_ENDERECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_TIPOENDERECO">
+              <PropertyRef Name="CD_TIPOENDERECO" />
+            </Principal>
+            <Dependent Role="EST_ENDERECO">
+              <PropertyRef Name="TIPOENDERECO_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ENDERECO__UF__29221CFB">
+          <End Role="EST_UF" Type="Self.EST_UF" Multiplicity="1" />
+          <End Role="EST_ENDERECO" Type="Self.EST_ENDERECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_UF">
+              <PropertyRef Name="CD_UF" />
+            </Principal>
+            <Dependent Role="EST_ENDERECO">
+              <PropertyRef Name="UF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__LANCA__498EEC8D">
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="1" />
+          <End Role="EST_HISTORICO_LANCAMENTO" Type="Self.EST_HISTORICO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_LANCAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_LANCAMENTO">
+              <PropertyRef Name="LANCAMENTOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__PRODU__3D2915A8">
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="1" />
+          <End Role="EST_HISTORICO_PRECO" Type="Self.EST_HISTORICO_PRECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_PRECO">
+              <PropertyRef Name="PRODUTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__TENAN__3C34F16F">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_HISTORICO_PRECO" Type="Self.EST_HISTORICO_PRECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_PRECO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__TENAN__489AC854">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_HISTORICO_LANCAMENTO" Type="Self.EST_HISTORICO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_LANCAMENTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__USUAR__4B7734FF">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="1" />
+          <End Role="EST_HISTORICO_LANCAMENTO" Type="Self.EST_HISTORICO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_LANCAMENTO">
+              <PropertyRef Name="USUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__ESTAB__2180FB33">
+          <End Role="INFRAESTABELECIMENTO" Type="Self.INFRAESTABELECIMENTO" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAESTABELECIMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="ESTABELECIMENTOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__PESSO__1DB06A4F">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="PESSOA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__PESSO__245D67DE">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="PESSOA_REMETENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__PESSO__25518C17">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="PESSOA_DESTINATARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__SITUA__1F98B2C1">
+          <End Role="EST_SITUACAOLANCAMENTO" Type="Self.EST_SITUACAOLANCAMENTO" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_SITUACAOLANCAMENTO">
+              <PropertyRef Name="CD_SITUACAOLANCAMENTO" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="SITUACAO_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__TENAN__1BC821DD">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__TIPOL__1CBC4616">
+          <End Role="EST_TIPOLANCAMENTO" Type="Self.EST_TIPOLANCAMENTO" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_TIPOLANCAMENTO">
+              <PropertyRef Name="CD_TIPO" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="TIPOLANCAMENTO_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LOG_A__INFRA__395884C4">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="1" />
+          <End Role="EST_LOG_AUDITORIA" Type="Self.EST_LOG_AUDITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LOG_AUDITORIA">
+              <PropertyRef Name="INFRAUSUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LOG_A__TENAN__37703C52">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_LOG_AUDITORIA" Type="Self.EST_LOG_AUDITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LOG_AUDITORIA">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PESSO__PAPEL__0B91BA14">
+          <End Role="EST_PAPEL" Type="Self.EST_PAPEL" Multiplicity="1" />
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PAPEL">
+              <PropertyRef Name="CD_PAPEL" />
+            </Principal>
+            <Dependent Role="EST_PESSOA">
+              <PropertyRef Name="PAPEL_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PESSO__TENAN__09A971A2">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_PESSOA">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PESSO__TIPOP__0A9D95DB">
+          <End Role="EST_TIPOPESSOA" Type="Self.EST_TIPOPESSOA" Multiplicity="1" />
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_TIPOPESSOA">
+              <PropertyRef Name="CD_TIPOPESSOA" />
+            </Principal>
+            <Dependent Role="EST_PESSOA">
+              <PropertyRef Name="TIPOPESSOA_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__CATEG__151B244E">
+          <End Role="EST_CATEGORIAPRODUTO" Type="Self.EST_CATEGORIAPRODUTO" Multiplicity="0..1" />
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_CATEGORIAPRODUTO">
+              <PropertyRef Name="CD_CATEGORIAPRODUTO" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO">
+              <PropertyRef Name="CATEGORIA_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__LANCA__11158940">
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="1" />
+          <End Role="EST_PRODUTO_LANCTO" Type="Self.EST_PRODUTO_LANCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_LANCAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO_LANCTO">
+              <PropertyRef Name="LANCAMENTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__PRODU__0F2D40CE">
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="1" />
+          <End Role="EST_PRODUTO_LANCTO" Type="Self.EST_PRODUTO_LANCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO_LANCTO">
+              <PropertyRef Name="PRODUTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__TENAN__14270015">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Aluguel">
+          <End Role="Loc_Cliente" Type="Self.Loc_Cliente" Multiplicity="1" />
+          <End Role="Loc_Aluguel" Type="Self.Loc_Aluguel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Aluguel">
+              <PropertyRef Name="Loc_ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endereco_Cliente">
+          <End Role="Loc_Cliente" Type="Self.Loc_Cliente" Multiplicity="1" />
+          <End Role="Loc_EnderecoCliente" Type="Self.Loc_EnderecoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_EnderecoCliente">
+              <PropertyRef Name="Loc_ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Aluguel">
+          <End Role="Loc_Funcionario" Type="Self.Loc_Funcionario" Multiplicity="1" />
+          <End Role="Loc_Aluguel" Type="Self.Loc_Aluguel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Aluguel">
+              <PropertyRef Name="Loc_FuncionarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marca_Veiculo">
+          <End Role="Loc_Marca" Type="Self.Loc_Marca" Multiplicity="1" />
+          <End Role="Loc_Veiculo" Type="Self.Loc_Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Marca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Veiculo">
+              <PropertyRef Name="MarcaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Veiculo">
+          <End Role="Loc_TipoVeiculo" Type="Self.Loc_TipoVeiculo" Multiplicity="0..1" />
+          <End Role="Loc_Veiculo" Type="Self.Loc_Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_TipoVeiculo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Veiculo">
+              <PropertyRef Name="TipoVeiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Veiculo_Aluguel">
+          <End Role="Loc_Veiculo" Type="Self.Loc_Veiculo" Multiplicity="1" />
+          <End Role="Loc_Aluguel" Type="Self.Loc_Aluguel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Veiculo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Aluguel">
+              <PropertyRef Name="Loc_VeiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FRK_INFRAUSUARIO_TENANT">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="0..1" />
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAUSUARIO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="0..1" />
+          <End Role="INFRAUSUARIOSENHASLOG" Type="Self.INFRAUSUARIOSENHASLOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAUSUARIOSENHASLOG">
+              <PropertyRef Name="INFRAUSUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID">
+          <End Role="INFRAEMPRESA" Type="Self.INFRAEMPRESA" Multiplicity="0..1" />
+          <End Role="INFRAESTABELECIMENTO" Type="Self.INFRAESTABELECIMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAEMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAESTABELECIMENTO">
+              <PropertyRef Name="EMPRESAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID">
+          <End Role="INFRAMNUMENU" Type="Self.INFRAMNUMENU" Multiplicity="0..1" />
+          <End Role="INFRAMNUMENUUSUARIO" Type="Self.INFRAMNUMENUUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAMNUMENU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAMNUMENUUSUARIO">
+              <PropertyRef Name="MENUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="0..1" />
+          <End Role="INFRAMNUMENUUSUARIO" Type="Self.INFRAMNUMENUUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAMNUMENUUSUARIO">
+              <PropertyRef Name="USUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="EST_ANEXO_LANCAMENTO" EntityType="Self.EST_ANEXO_LANCAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_CATEGORIAPRODUTO" EntityType="Self.EST_CATEGORIAPRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_CONTATO" EntityType="Self.EST_CONTATO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_ENDERECO" EntityType="Self.EST_ENDERECO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_HISTORICO_LANCAMENTO" EntityType="Self.EST_HISTORICO_LANCAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_HISTORICO_PRECO" EntityType="Self.EST_HISTORICO_PRECO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_LANCAMENTO" EntityType="Self.EST_LANCAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_LOG_AUDITORIA" EntityType="Self.EST_LOG_AUDITORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_PAPEL" EntityType="Self.EST_PAPEL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_PESSOA" EntityType="Self.EST_PESSOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_PRODUTO" EntityType="Self.EST_PRODUTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_PRODUTO_LANCTO" EntityType="Self.EST_PRODUTO_LANCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_SITUACAOLANCAMENTO" EntityType="Self.EST_SITUACAOLANCAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_TIPOENDERECO" EntityType="Self.EST_TIPOENDERECO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_TIPOLANCAMENTO" EntityType="Self.EST_TIPOLANCAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_TIPOPESSOA" EntityType="Self.EST_TIPOPESSOA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EST_UF" EntityType="Self.EST_UF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INFRAEMPRESA" EntityType="Self.INFRAEMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INFRAESTABELECIMENTO" EntityType="Self.INFRAESTABELECIMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INFRAMNUMENU" EntityType="Self.INFRAMNUMENU" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INFRAMNUMENUUSUARIO" EntityType="Self.INFRAMNUMENUUSUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INFRAUSUARIO" EntityType="Self.INFRAUSUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INFRAUSUARIOSENHASLOG" EntityType="Self.INFRAUSUARIOSENHASLOG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loc_Aluguel" EntityType="Self.Loc_Aluguel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loc_Cliente" EntityType="Self.Loc_Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loc_EnderecoCliente" EntityType="Self.Loc_EnderecoCliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loc_Funcionario" EntityType="Self.Loc_Funcionario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loc_Marca" EntityType="Self.Loc_Marca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loc_TipoVeiculo" EntityType="Self.Loc_TipoVeiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Loc_Veiculo" EntityType="Self.Loc_Veiculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OSSYS_TENANT" EntityType="Self.OSSYS_TENANT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CRPGRUPO" EntityType="Self.CRPGRUPO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CRPGRUPO].[TENANT_ID] AS [TENANT_ID], 
+    [CRPGRUPO].[IDCRPGRUPO] AS [IDCRPGRUPO], 
+    [CRPGRUPO].[CODIGO] AS [CODIGO], 
+    [CRPGRUPO].[DESCRICAO] AS [DESCRICAO], 
+    [CRPGRUPO].[ISGRUPOFINAL] AS [ISGRUPOFINAL], 
+    [CRPGRUPO].[NUMERONIVEL] AS [NUMERONIVEL], 
+    [CRPGRUPO].[IS_ACTIVE] AS [IS_ACTIVE], 
+    [CRPGRUPO].[IS_CATALOGO] AS [IS_CATALOGO]
+    FROM [dbo].[CRPGRUPO] AS [CRPGRUPO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRAAUTHENTICATION" EntityType="Self.INFRAAUTHENTICATION" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRAAUTHENTICATION].[TENANT_ID] AS [TENANT_ID], 
+    [INFRAAUTHENTICATION].[ID] AS [ID], 
+    [INFRAAUTHENTICATION].[INFRAINAUTHTYPEID] AS [INFRAINAUTHTYPEID], 
+    [INFRAAUTHENTICATION].[IS_2FAENABLED] AS [IS_2FAENABLED], 
+    [INFRAAUTHENTICATION].[INFRAIN2FATYPEID] AS [INFRAIN2FATYPEID]
+    FROM [dbo].[INFRAAUTHENTICATION] AS [INFRAAUTHENTICATION]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRAEMAILCFG" EntityType="Self.INFRAEMAILCFG" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRAEMAILCFG].[TENANT_ID] AS [TENANT_ID], 
+    [INFRAEMAILCFG].[ID] AS [ID], 
+    [INFRAEMAILCFG].[SMTPSERVER] AS [SMTPSERVER], 
+    [INFRAEMAILCFG].[SMTPPORT] AS [SMTPPORT], 
+    [INFRAEMAILCFG].[TIMEOUT] AS [TIMEOUT], 
+    [INFRAEMAILCFG].[USERNAME] AS [USERNAME], 
+    [INFRAEMAILCFG].[PASSWORD] AS [PASSWORD], 
+    [INFRAEMAILCFG].[NOMEREMET] AS [NOMEREMET], 
+    [INFRAEMAILCFG].[EMAILADRESS] AS [EMAILADRESS], 
+    [INFRAEMAILCFG].[IS_SSL] AS [IS_SSL], 
+    [INFRAEMAILCFG].[IS_TLS] AS [IS_TLS], 
+    [INFRAEMAILCFG].[IS_AUTHENTICATED] AS [IS_AUTHENTICATED], 
+    [INFRAEMAILCFG].[CONFIRMLEIT] AS [CONFIRMLEIT], 
+    [INFRAEMAILCFG].[CONFIRMENTREG] AS [CONFIRMENTREG], 
+    [INFRAEMAILCFG].[IMAPSERVER] AS [IMAPSERVER], 
+    [INFRAEMAILCFG].[IMAPPORT] AS [IMAPPORT], 
+    [INFRAEMAILCFG].[INFRAESTABID] AS [INFRAESTABID], 
+    [INFRAEMAILCFG].[PASSWORD_ANG] AS [PASSWORD_ANG], 
+    [INFRAEMAILCFG].[URLSERVIDOR] AS [URLSERVIDOR]
+    FROM [dbo].[INFRAEMAILCFG] AS [INFRAEMAILCFG]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRAGRUPO" EntityType="Self.INFRAGRUPO" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRAGRUPO].[TENANT_ID] AS [TENANT_ID], 
+    [INFRAGRUPO].[ID] AS [ID], 
+    [INFRAGRUPO].[NOME] AS [NOME], 
+    [INFRAGRUPO].[DESCRICAO] AS [DESCRICAO]
+    FROM [dbo].[INFRAGRUPO] AS [INFRAGRUPO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRAIN2FATYPE" EntityType="Self.INFRAIN2FATYPE" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRAIN2FATYPE].[ID] AS [ID], 
+    [INFRAIN2FATYPE].[NOME] AS [NOME], 
+    [INFRAIN2FATYPE].[CODIGO] AS [CODIGO], 
+    [INFRAIN2FATYPE].[ORDEM] AS [ORDEM], 
+    [INFRAIN2FATYPE].[IS_ACTIVE] AS [IS_ACTIVE]
+    FROM [dbo].[INFRAIN2FATYPE] AS [INFRAIN2FATYPE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRAINAUTHTYPE" EntityType="Self.INFRAINAUTHTYPE" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRAINAUTHTYPE].[ID] AS [ID], 
+    [INFRAINAUTHTYPE].[NOME] AS [NOME], 
+    [INFRAINAUTHTYPE].[CODIGO] AS [CODIGO], 
+    [INFRAINAUTHTYPE].[ORDEM] AS [ORDEM], 
+    [INFRAINAUTHTYPE].[IS_ACTIVE] AS [IS_ACTIVE]
+    FROM [dbo].[INFRAINAUTHTYPE] AS [INFRAINAUTHTYPE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="InfraLogRecupSenha" EntityType="Self.InfraLogRecupSenha" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [InfraLogRecupSenha].[TENANT_ID] AS [TENANT_ID], 
+    [InfraLogRecupSenha].[ID] AS [ID], 
+    [InfraLogRecupSenha].[INFRAUSUARIOID] AS [INFRAUSUARIOID], 
+    [InfraLogRecupSenha].[GUID] AS [GUID], 
+    [InfraLogRecupSenha].[DTALTERACAO] AS [DTALTERACAO], 
+    [InfraLogRecupSenha].[DTSOLICITACAO] AS [DTSOLICITACAO], 
+    [InfraLogRecupSenha].[IS_EFETIVADO] AS [IS_EFETIVADO]
+    FROM [dbo].[InfraLogRecupSenha] AS [InfraLogRecupSenha]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRASEGCONFIG" EntityType="Self.INFRASEGCONFIG" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRASEGCONFIG].[TENANT_ID] AS [TENANT_ID], 
+    [INFRASEGCONFIG].[ID] AS [ID], 
+    [INFRASEGCONFIG].[IS_LETRASMAIUSCULAS] AS [IS_LETRASMAIUSCULAS], 
+    [INFRASEGCONFIG].[IS_NUMEROS] AS [IS_NUMEROS], 
+    [INFRASEGCONFIG].[IS_CARACTERESESPECIAIS] AS [IS_CARACTERESESPECIAIS], 
+    [INFRASEGCONFIG].[QTNINATIVIDADE] AS [QTNINATIVIDADE], 
+    [INFRASEGCONFIG].[QTNTROCASENHA] AS [QTNTROCASENHA], 
+    [INFRASEGCONFIG].[QTNTENTATIVA] AS [QTNTENTATIVA], 
+    [INFRASEGCONFIG].[QTNREPETICAO] AS [QTNREPETICAO], 
+    [INFRASEGCONFIG].[QTNMINIMA] AS [QTNMINIMA], 
+    [INFRASEGCONFIG].[IS_DROPSESSION] AS [IS_DROPSESSION], 
+    [INFRASEGCONFIG].[LEVEL] AS [LEVEL]
+    FROM [dbo].[INFRASEGCONFIG] AS [INFRASEGCONFIG]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRAUSUARIO_IMG" EntityType="Self.INFRAUSUARIO_IMG" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRAUSUARIO_IMG].[TENANT_ID] AS [TENANT_ID], 
+    [INFRAUSUARIO_IMG].[ID] AS [ID], 
+    [INFRAUSUARIO_IMG].[IMAGEM] AS [IMAGEM], 
+    [INFRAUSUARIO_IMG].[FILENAME] AS [FILENAME], 
+    [INFRAUSUARIO_IMG].[DATACRIACAO] AS [DATACRIACAO], 
+    [INFRAUSUARIO_IMG].[IS_ACTIVE] AS [IS_ACTIVE], 
+    [INFRAUSUARIO_IMG].[USUARIOID] AS [USUARIOID]
+    FROM [dbo].[INFRAUSUARIO_IMG] AS [INFRAUSUARIO_IMG]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="INFRAUSUARIOLOG1" EntityType="Self.INFRAUSUARIOLOG1" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [INFRAUSUARIOLOG1].[TENANT_ID] AS [TENANT_ID], 
+    [INFRAUSUARIOLOG1].[ID] AS [ID], 
+    [INFRAUSUARIOLOG1].[INFRAUSUARIOID] AS [INFRAUSUARIOID], 
+    [INFRAUSUARIOLOG1].[DATETIME] AS [DATETIME]
+    FROM [dbo].[INFRAUSUARIOLOG1] AS [INFRAUSUARIOLOG1]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__EST_ANEXO__LANCA__42E1EEFE" Association="Self.FK__EST_ANEXO__LANCA__42E1EEFE">
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+            <End Role="EST_ANEXO_LANCAMENTO" EntitySet="EST_ANEXO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ANEXO__TENAN__41EDCAC5" Association="Self.FK__EST_ANEXO__TENAN__41EDCAC5">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_ANEXO_LANCAMENTO" EntitySet="EST_ANEXO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ANEXO__USUAR__44CA3770" Association="Self.FK__EST_ANEXO__USUAR__44CA3770">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="EST_ANEXO_LANCAMENTO" EntitySet="EST_ANEXO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_CONTA__PESSO__114A936A" Association="Self.FK__EST_CONTA__PESSO__114A936A">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_CONTATO" EntitySet="EST_CONTATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ENDER__PESSO__282DF8C2" Association="Self.FK__EST_ENDER__PESSO__282DF8C2">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_ENDERECO" EntitySet="EST_ENDERECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ENDER__TIPOE__2A164134" Association="Self.FK__EST_ENDER__TIPOE__2A164134">
+            <End Role="EST_TIPOENDERECO" EntitySet="EST_TIPOENDERECO" />
+            <End Role="EST_ENDERECO" EntitySet="EST_ENDERECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ENDERECO__UF__29221CFB" Association="Self.FK__EST_ENDERECO__UF__29221CFB">
+            <End Role="EST_UF" EntitySet="EST_UF" />
+            <End Role="EST_ENDERECO" EntitySet="EST_ENDERECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__LANCA__498EEC8D" Association="Self.FK__EST_HISTO__LANCA__498EEC8D">
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+            <End Role="EST_HISTORICO_LANCAMENTO" EntitySet="EST_HISTORICO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__PRODU__3D2915A8" Association="Self.FK__EST_HISTO__PRODU__3D2915A8">
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+            <End Role="EST_HISTORICO_PRECO" EntitySet="EST_HISTORICO_PRECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__TENAN__3C34F16F" Association="Self.FK__EST_HISTO__TENAN__3C34F16F">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_HISTORICO_PRECO" EntitySet="EST_HISTORICO_PRECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__TENAN__489AC854" Association="Self.FK__EST_HISTO__TENAN__489AC854">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_HISTORICO_LANCAMENTO" EntitySet="EST_HISTORICO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__USUAR__4B7734FF" Association="Self.FK__EST_HISTO__USUAR__4B7734FF">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="EST_HISTORICO_LANCAMENTO" EntitySet="EST_HISTORICO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__ESTAB__2180FB33" Association="Self.FK__EST_LANCA__ESTAB__2180FB33">
+            <End Role="INFRAESTABELECIMENTO" EntitySet="INFRAESTABELECIMENTO" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__PESSO__1DB06A4F" Association="Self.FK__EST_LANCA__PESSO__1DB06A4F">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__PESSO__245D67DE" Association="Self.FK__EST_LANCA__PESSO__245D67DE">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__PESSO__25518C17" Association="Self.FK__EST_LANCA__PESSO__25518C17">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__SITUA__1F98B2C1" Association="Self.FK__EST_LANCA__SITUA__1F98B2C1">
+            <End Role="EST_SITUACAOLANCAMENTO" EntitySet="EST_SITUACAOLANCAMENTO" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__TENAN__1BC821DD" Association="Self.FK__EST_LANCA__TENAN__1BC821DD">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__TIPOL__1CBC4616" Association="Self.FK__EST_LANCA__TIPOL__1CBC4616">
+            <End Role="EST_TIPOLANCAMENTO" EntitySet="EST_TIPOLANCAMENTO" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LOG_A__INFRA__395884C4" Association="Self.FK__EST_LOG_A__INFRA__395884C4">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="EST_LOG_AUDITORIA" EntitySet="EST_LOG_AUDITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LOG_A__TENAN__37703C52" Association="Self.FK__EST_LOG_A__TENAN__37703C52">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_LOG_AUDITORIA" EntitySet="EST_LOG_AUDITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PESSO__PAPEL__0B91BA14" Association="Self.FK__EST_PESSO__PAPEL__0B91BA14">
+            <End Role="EST_PAPEL" EntitySet="EST_PAPEL" />
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PESSO__TENAN__09A971A2" Association="Self.FK__EST_PESSO__TENAN__09A971A2">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PESSO__TIPOP__0A9D95DB" Association="Self.FK__EST_PESSO__TIPOP__0A9D95DB">
+            <End Role="EST_TIPOPESSOA" EntitySet="EST_TIPOPESSOA" />
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__CATEG__151B244E" Association="Self.FK__EST_PRODU__CATEG__151B244E">
+            <End Role="EST_CATEGORIAPRODUTO" EntitySet="EST_CATEGORIAPRODUTO" />
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__LANCA__11158940" Association="Self.FK__EST_PRODU__LANCA__11158940">
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+            <End Role="EST_PRODUTO_LANCTO" EntitySet="EST_PRODUTO_LANCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__PRODU__0F2D40CE" Association="Self.FK__EST_PRODU__PRODU__0F2D40CE">
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+            <End Role="EST_PRODUTO_LANCTO" EntitySet="EST_PRODUTO_LANCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__TENAN__14270015" Association="Self.FK__EST_PRODU__TENAN__14270015">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Aluguel" Association="Self.FK_Cliente_Aluguel">
+            <End Role="Loc_Cliente" EntitySet="Loc_Cliente" />
+            <End Role="Loc_Aluguel" EntitySet="Loc_Aluguel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endereco_Cliente" Association="Self.FK_Endereco_Cliente">
+            <End Role="Loc_Cliente" EntitySet="Loc_Cliente" />
+            <End Role="Loc_EnderecoCliente" EntitySet="Loc_EnderecoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Aluguel" Association="Self.FK_Funcionario_Aluguel">
+            <End Role="Loc_Funcionario" EntitySet="Loc_Funcionario" />
+            <End Role="Loc_Aluguel" EntitySet="Loc_Aluguel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marca_Veiculo" Association="Self.FK_Marca_Veiculo">
+            <End Role="Loc_Marca" EntitySet="Loc_Marca" />
+            <End Role="Loc_Veiculo" EntitySet="Loc_Veiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Veiculo" Association="Self.FK_Tipo_Veiculo">
+            <End Role="Loc_TipoVeiculo" EntitySet="Loc_TipoVeiculo" />
+            <End Role="Loc_Veiculo" EntitySet="Loc_Veiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Veiculo_Aluguel" Association="Self.FK_Veiculo_Aluguel">
+            <End Role="Loc_Veiculo" EntitySet="Loc_Veiculo" />
+            <End Role="Loc_Aluguel" EntitySet="Loc_Aluguel" />
+          </AssociationSet>
+          <AssociationSet Name="FRK_INFRAUSUARIO_TENANT" Association="Self.FRK_INFRAUSUARIO_TENANT">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID" Association="Self.OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="INFRAUSUARIOSENHASLOG" EntitySet="INFRAUSUARIOSENHASLOG" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID" Association="Self.OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID">
+            <End Role="INFRAEMPRESA" EntitySet="INFRAEMPRESA" />
+            <End Role="INFRAESTABELECIMENTO" EntitySet="INFRAESTABELECIMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID" Association="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID">
+            <End Role="INFRAMNUMENU" EntitySet="INFRAMNUMENU" />
+            <End Role="INFRAMNUMENUUSUARIO" EntitySet="INFRAMNUMENUUSUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID" Association="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="INFRAMNUMENUUSUARIO" EntitySet="INFRAMNUMENUUSUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EST_ANEXO_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="ID_ANEXO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" Nullable="false" />
+          <Property Name="ID_ANEXO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LANCAMENTOID" Type="Int64" Nullable="false" />
+          <Property Name="NOMEARQUIVO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ARQUIVO" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="COMENTARIO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="DT_CRIACAO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="USUARIOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="IS_NFE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_ANEXO__LANCA__42E1EEFE" FromRole="EST_ANEXO_LANCAMENTO" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FK__EST_ANEXO__TENAN__41EDCAC5" FromRole="EST_ANEXO_LANCAMENTO" ToRole="OSSYS_TENANT" />
+          <NavigationProperty Name="INFRAUSUARIO" Relationship="Self.FK__EST_ANEXO__USUAR__44CA3770" FromRole="EST_ANEXO_LANCAMENTO" ToRole="INFRAUSUARIO" />
+        </EntityType>
+        <EntityType Name="EST_CATEGORIAPRODUTO">
+          <Key>
+            <PropertyRef Name="CD_CATEGORIAPRODUTO" />
+          </Key>
+          <Property Name="CD_CATEGORIAPRODUTO" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EST_PRODUTO" Relationship="Self.FK__EST_PRODU__CATEG__151B244E" FromRole="EST_CATEGORIAPRODUTO" ToRole="EST_PRODUTO" />
+        </EntityType>
+        <EntityType Name="EST_CONTATO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PESSOA_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_APELIDOCONTATO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TX_EMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TX_TELEFONEFIXO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TX_CELULAR" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TX_RAMAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EST_PESSOA" Relationship="Self.FK__EST_CONTA__PESSO__114A936A" FromRole="EST_CONTATO" ToRole="EST_PESSOA" />
+        </EntityType>
+        <EntityType Name="EST_ENDERECO">
+          <Key>
+            <PropertyRef Name="ID_ENDERECO" />
+          </Key>
+          <Property Name="ID_ENDERECO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PESSOA_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="LOGRADOURO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NUMERO" Type="Int32" />
+          <Property Name="COMPLEMENTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BAIRRO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CIDADE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CEP" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPOENDERECO_CD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="IS_PRINCIPAL" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EST_PESSOA" Relationship="Self.FK__EST_ENDER__PESSO__282DF8C2" FromRole="EST_ENDERECO" ToRole="EST_PESSOA" />
+          <NavigationProperty Name="EST_TIPOENDERECO" Relationship="Self.FK__EST_ENDER__TIPOE__2A164134" FromRole="EST_ENDERECO" ToRole="EST_TIPOENDERECO" />
+          <NavigationProperty Name="EST_UF" Relationship="Self.FK__EST_ENDERECO__UF__29221CFB" FromRole="EST_ENDERECO" ToRole="EST_UF" />
+        </EntityType>
+        <EntityType Name="EST_HISTORICO_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="ID_HISTORICO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" Nullable="false" />
+          <Property Name="ID_HISTORICO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LANCAMENTOID" Type="Int64" Nullable="false" />
+          <Property Name="TX_COMENTARIO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="TX_ACAO_EXECUTADA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DT_ENVIO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="USUARIOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IS_ORIGEM_SISTEMA" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_HISTO__LANCA__498EEC8D" FromRole="EST_HISTORICO_LANCAMENTO" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FK__EST_HISTO__TENAN__489AC854" FromRole="EST_HISTORICO_LANCAMENTO" ToRole="OSSYS_TENANT" />
+          <NavigationProperty Name="INFRAUSUARIO" Relationship="Self.FK__EST_HISTO__USUAR__4B7734FF" FromRole="EST_HISTORICO_LANCAMENTO" ToRole="INFRAUSUARIO" />
+        </EntityType>
+        <EntityType Name="EST_HISTORICO_PRECO">
+          <Key>
+            <PropertyRef Name="ID_HISTORICO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" Nullable="false" />
+          <Property Name="ID_HISTORICO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUTO_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DT_VIGENCIA" Type="DateTime" Precision="3" />
+          <Property Name="VL_NOVOPRECO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="VL_PRECOANTERIOR" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="EST_PRODUTO" Relationship="Self.FK__EST_HISTO__PRODU__3D2915A8" FromRole="EST_HISTORICO_PRECO" ToRole="EST_PRODUTO" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FK__EST_HISTO__TENAN__3C34F16F" FromRole="EST_HISTORICO_PRECO" ToRole="OSSYS_TENANT" />
+        </EntityType>
+        <EntityType Name="EST_LANCAMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPOLANCAMENTO_CD" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PESSOA_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_CODIGOBARRAS" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="SITUACAO_CD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DT_LANCAMENTO" Type="DateTime" Precision="3" />
+          <Property Name="VL_LANCAMENTO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DT_PAGAMENTO" Type="DateTime" Precision="3" />
+          <Property Name="TX_DESCRICAO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="ESTABELECIMENTOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VL_DESCONTO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="VL_IMPOSTO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="DT_VENCIMENTO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PESSOA_REMETENTE_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PESSOA_DESTINATARIO_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EST_ANEXO_LANCAMENTO" Relationship="Self.FK__EST_ANEXO__LANCA__42E1EEFE" FromRole="EST_LANCAMENTO" ToRole="EST_ANEXO_LANCAMENTO" />
+          <NavigationProperty Name="EST_HISTORICO_LANCAMENTO" Relationship="Self.FK__EST_HISTO__LANCA__498EEC8D" FromRole="EST_LANCAMENTO" ToRole="EST_HISTORICO_LANCAMENTO" />
+          <NavigationProperty Name="INFRAESTABELECIMENTO" Relationship="Self.FK__EST_LANCA__ESTAB__2180FB33" FromRole="EST_LANCAMENTO" ToRole="INFRAESTABELECIMENTO" />
+          <NavigationProperty Name="EST_PESSOA" Relationship="Self.FK__EST_LANCA__PESSO__1DB06A4F" FromRole="EST_LANCAMENTO" ToRole="EST_PESSOA" />
+          <NavigationProperty Name="EST_PESSOA1" Relationship="Self.FK__EST_LANCA__PESSO__245D67DE" FromRole="EST_LANCAMENTO" ToRole="EST_PESSOA" />
+          <NavigationProperty Name="EST_PESSOA2" Relationship="Self.FK__EST_LANCA__PESSO__25518C17" FromRole="EST_LANCAMENTO" ToRole="EST_PESSOA" />
+          <NavigationProperty Name="EST_SITUACAOLANCAMENTO" Relationship="Self.FK__EST_LANCA__SITUA__1F98B2C1" FromRole="EST_LANCAMENTO" ToRole="EST_SITUACAOLANCAMENTO" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FK__EST_LANCA__TENAN__1BC821DD" FromRole="EST_LANCAMENTO" ToRole="OSSYS_TENANT" />
+          <NavigationProperty Name="EST_TIPOLANCAMENTO" Relationship="Self.FK__EST_LANCA__TIPOL__1CBC4616" FromRole="EST_LANCAMENTO" ToRole="EST_TIPOLANCAMENTO" />
+          <NavigationProperty Name="EST_PRODUTO_LANCTO" Relationship="Self.FK__EST_PRODU__LANCA__11158940" FromRole="EST_LANCAMENTO" ToRole="EST_PRODUTO_LANCTO" />
+        </EntityType>
+        <EntityType Name="EST_LOG_AUDITORIA">
+          <Key>
+            <PropertyRef Name="ID_LOG" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" Nullable="false" />
+          <Property Name="ID_LOG" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TX_TABELA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_ACAOREALIZADA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DT_ACAOREALIZADA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TX_DESCRICAODETALHADA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="INFRAUSUARIO_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="INFRAUSUARIO" Relationship="Self.FK__EST_LOG_A__INFRA__395884C4" FromRole="EST_LOG_AUDITORIA" ToRole="INFRAUSUARIO" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FK__EST_LOG_A__TENAN__37703C52" FromRole="EST_LOG_AUDITORIA" ToRole="OSSYS_TENANT" />
+        </EntityType>
+        <EntityType Name="EST_PAPEL">
+          <Key>
+            <PropertyRef Name="CD_PAPEL" />
+          </Key>
+          <Property Name="CD_PAPEL" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EST_PESSOA" Relationship="Self.FK__EST_PESSO__PAPEL__0B91BA14" FromRole="EST_PAPEL" ToRole="EST_PESSOA" />
+        </EntityType>
+        <EntityType Name="EST_PESSOA">
+          <Key>
+            <PropertyRef Name="ID_PESSOA" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" Nullable="false" />
+          <Property Name="ID_PESSOA" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_NOMEPESSOA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPOPESSOA_CD" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PAPEL_CD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_DOCUMENTO" Type="String" MaxLength="19" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DT_NASCIMENTO" Type="DateTime" Precision="3" />
+          <Property Name="DT_FUNDACAO" Type="DateTime" Precision="3" />
+          <Property Name="DT_INICIOVINCULO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DT_CRIACAO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DT_ULTIMAALTERACAO" Type="DateTime" Precision="3" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_ESTRANGEIRO" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="EST_CONTATO" Relationship="Self.FK__EST_CONTA__PESSO__114A936A" FromRole="EST_PESSOA" ToRole="EST_CONTATO" />
+          <NavigationProperty Name="EST_ENDERECO" Relationship="Self.FK__EST_ENDER__PESSO__282DF8C2" FromRole="EST_PESSOA" ToRole="EST_ENDERECO" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_LANCA__PESSO__1DB06A4F" FromRole="EST_PESSOA" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="EST_LANCAMENTO1" Relationship="Self.FK__EST_LANCA__PESSO__245D67DE" FromRole="EST_PESSOA" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="EST_LANCAMENTO2" Relationship="Self.FK__EST_LANCA__PESSO__25518C17" FromRole="EST_PESSOA" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="EST_PAPEL" Relationship="Self.FK__EST_PESSO__PAPEL__0B91BA14" FromRole="EST_PESSOA" ToRole="EST_PAPEL" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FK__EST_PESSO__TENAN__09A971A2" FromRole="EST_PESSOA" ToRole="OSSYS_TENANT" />
+          <NavigationProperty Name="EST_TIPOPESSOA" Relationship="Self.FK__EST_PESSO__TIPOP__0A9D95DB" FromRole="EST_PESSOA" ToRole="EST_TIPOPESSOA" />
+        </EntityType>
+        <EntityType Name="EST_PRODUTO">
+          <Key>
+            <PropertyRef Name="ID_PRODUTO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" Nullable="false" />
+          <Property Name="ID_PRODUTO" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_DESCRICAO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CATEGORIA_CD" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="QT_MINIMA" Type="Int64" />
+          <Property Name="QT_ATUAL" Type="Int64" />
+          <Property Name="VL_PRECO_RECOMENDADO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <NavigationProperty Name="EST_CATEGORIAPRODUTO" Relationship="Self.FK__EST_PRODU__CATEG__151B244E" FromRole="EST_PRODUTO" ToRole="EST_CATEGORIAPRODUTO" />
+          <NavigationProperty Name="EST_HISTORICO_PRECO" Relationship="Self.FK__EST_HISTO__PRODU__3D2915A8" FromRole="EST_PRODUTO" ToRole="EST_HISTORICO_PRECO" />
+          <NavigationProperty Name="EST_PRODUTO_LANCTO" Relationship="Self.FK__EST_PRODU__PRODU__0F2D40CE" FromRole="EST_PRODUTO" ToRole="EST_PRODUTO_LANCTO" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FK__EST_PRODU__TENAN__14270015" FromRole="EST_PRODUTO" ToRole="OSSYS_TENANT" />
+        </EntityType>
+        <EntityType Name="EST_PRODUTO_LANCTO">
+          <Key>
+            <PropertyRef Name="ID_PRODUTOLANCAMENTO" />
+          </Key>
+          <Property Name="ID_PRODUTOLANCAMENTO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PRODUTO_ID" Type="String" MaxLength="36" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LANCAMENTO_ID" Type="Int64" Nullable="false" />
+          <Property Name="QT_PRODUTO" Type="Int64" Nullable="false" />
+          <Property Name="DT_PEDIDO" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="VL_TOTAL" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_PRODU__LANCA__11158940" FromRole="EST_PRODUTO_LANCTO" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="EST_PRODUTO" Relationship="Self.FK__EST_PRODU__PRODU__0F2D40CE" FromRole="EST_PRODUTO_LANCTO" ToRole="EST_PRODUTO" />
+        </EntityType>
+        <EntityType Name="EST_SITUACAOLANCAMENTO">
+          <Key>
+            <PropertyRef Name="CD_SITUACAOLANCAMENTO" />
+          </Key>
+          <Property Name="CD_SITUACAOLANCAMENTO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_LANCA__SITUA__1F98B2C1" FromRole="EST_SITUACAOLANCAMENTO" ToRole="EST_LANCAMENTO" />
+        </EntityType>
+        <EntityType Name="EST_TIPOENDERECO">
+          <Key>
+            <PropertyRef Name="CD_TIPOENDERECO" />
+          </Key>
+          <Property Name="CD_TIPOENDERECO" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_TIPOENDERECO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EST_ENDERECO" Relationship="Self.FK__EST_ENDER__TIPOE__2A164134" FromRole="EST_TIPOENDERECO" ToRole="EST_ENDERECO" />
+        </EntityType>
+        <EntityType Name="EST_TIPOLANCAMENTO">
+          <Key>
+            <PropertyRef Name="CD_TIPO" />
+          </Key>
+          <Property Name="CD_TIPO" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_TIPOLANCAMENTO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_LANCA__TIPOL__1CBC4616" FromRole="EST_TIPOLANCAMENTO" ToRole="EST_LANCAMENTO" />
+        </EntityType>
+        <EntityType Name="EST_TIPOPESSOA">
+          <Key>
+            <PropertyRef Name="CD_TIPOPESSOA" />
+          </Key>
+          <Property Name="CD_TIPOPESSOA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_TIPOPESSOA" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EST_PESSOA" Relationship="Self.FK__EST_PESSO__TIPOP__0A9D95DB" FromRole="EST_TIPOPESSOA" ToRole="EST_PESSOA" />
+        </EntityType>
+        <EntityType Name="EST_UF">
+          <Key>
+            <PropertyRef Name="CD_UF" />
+          </Key>
+          <Property Name="CD_UF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TX_NOME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EST_ENDERECO" Relationship="Self.FK__EST_ENDERECO__UF__29221CFB" FromRole="EST_UF" ToRole="EST_ENDERECO" />
+        </EntityType>
+        <EntityType Name="INFRAEMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NOME" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <NavigationProperty Name="INFRAESTABELECIMENTO" Relationship="Self.OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID" FromRole="INFRAEMPRESA" ToRole="INFRAESTABELECIMENTO" />
+        </EntityType>
+        <EntityType Name="INFRAESTABELECIMENTO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NOMEEXIBICAO" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RAZAOSOCIAL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NOMEFANTASIA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CNPJ" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="IS_MATRIZ" Type="Boolean" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="EMPRESAID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="IDIOMAID" Type="Int32" />
+          <Property Name="AVISOINICIAL" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_LANCA__ESTAB__2180FB33" FromRole="INFRAESTABELECIMENTO" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="INFRAEMPRESA" Relationship="Self.OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID" FromRole="INFRAESTABELECIMENTO" ToRole="INFRAEMPRESA" />
+        </EntityType>
+        <EntityType Name="INFRAMNUMENU">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UNICOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="LABEL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LABEL_ENGLISH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LABEL_SPANISH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRICAO_ENGLISH" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRICAO_SPANISH" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DATACREATE" Type="DateTime" Precision="3" />
+          <Property Name="ORDER" Type="Int32" />
+          <Property Name="CLASSICON" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ISACTIVE" Type="Boolean" />
+          <Property Name="URLDASHBOARD" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="URL" Type="String" MaxLength="120" FixedLength="false" Unicode="true" />
+          <Property Name="TxModuloCod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="INFRAMNUMENUUSUARIO" Relationship="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID" FromRole="INFRAMNUMENU" ToRole="INFRAMNUMENUUSUARIO" />
+        </EntityType>
+        <EntityType Name="INFRAMNUMENUUSUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USUARIOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="MENUID" Type="Int64" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <NavigationProperty Name="INFRAMNUMENU" Relationship="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID" FromRole="INFRAMNUMENUUSUARIO" ToRole="INFRAMNUMENU" />
+          <NavigationProperty Name="INFRAUSUARIO" Relationship="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID" FromRole="INFRAMNUMENUUSUARIO" ToRole="INFRAUSUARIO" />
+        </EntityType>
+        <EntityType Name="INFRAUSUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int64" />
+          <Property Name="ID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="USUARIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SENHA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="EMAIL" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TELEFONE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CARGO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DATACRIACAO" Type="DateTime" Precision="3" />
+          <Property Name="DATAULTIMOACESSO" Type="DateTime" Precision="3" />
+          <Property Name="IS_BLOQUEADO" Type="Boolean" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="USEROUTSYSTEMSID" Type="Int32" />
+          <Property Name="IDIOMAID" Type="Int32" />
+          <Property Name="INFRACONFIGLDAP" Type="Int64" />
+          <Property Name="LASTLOGESTABID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="LASTLOGSPRINT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="READLASTSPRINT" Type="Boolean" />
+          <Property Name="USAERP" Type="Boolean" />
+          <Property Name="FORCE_PSWCHANGE" Type="Boolean" />
+          <Property Name="USACHAT" Type="Boolean" />
+          <Property Name="SENHAHASH512" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TxCPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="DtHoraValidadeLogin" Type="DateTime" Precision="3" />
+          <Property Name="Is_Externo" Type="Boolean" />
+          <NavigationProperty Name="EST_ANEXO_LANCAMENTO" Relationship="Self.FK__EST_ANEXO__USUAR__44CA3770" FromRole="INFRAUSUARIO" ToRole="EST_ANEXO_LANCAMENTO" />
+          <NavigationProperty Name="EST_HISTORICO_LANCAMENTO" Relationship="Self.FK__EST_HISTO__USUAR__4B7734FF" FromRole="INFRAUSUARIO" ToRole="EST_HISTORICO_LANCAMENTO" />
+          <NavigationProperty Name="EST_LOG_AUDITORIA" Relationship="Self.FK__EST_LOG_A__INFRA__395884C4" FromRole="INFRAUSUARIO" ToRole="EST_LOG_AUDITORIA" />
+          <NavigationProperty Name="INFRAMNUMENUUSUARIO" Relationship="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID" FromRole="INFRAUSUARIO" ToRole="INFRAMNUMENUUSUARIO" />
+          <NavigationProperty Name="OSSYS_TENANT" Relationship="Self.FRK_INFRAUSUARIO_TENANT" FromRole="INFRAUSUARIO" ToRole="OSSYS_TENANT" />
+          <NavigationProperty Name="INFRAUSUARIOSENHASLOG" Relationship="Self.OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID" FromRole="INFRAUSUARIO" ToRole="INFRAUSUARIOSENHASLOG" />
+        </EntityType>
+        <EntityType Name="INFRAUSUARIOSENHASLOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SENHA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="INFRAUSUARIOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="DATETIME" Type="DateTime" Precision="3" />
+          <Property Name="IS_EFFECTIVE" Type="Boolean" />
+          <NavigationProperty Name="INFRAUSUARIO" Relationship="Self.OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID" FromRole="INFRAUSUARIOSENHASLOG" ToRole="INFRAUSUARIO" />
+        </EntityType>
+        <EntityType Name="Loc_Aluguel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Loc_ClienteId" Type="Int64" Nullable="false" />
+          <Property Name="Loc_FuncionarioId" Type="Int64" Nullable="false" />
+          <Property Name="Loc_VeiculoId" Type="Int64" Nullable="false" />
+          <Property Name="DtRetirada" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DtEntregaPrevista" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DtEntregaEfetiva" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ValorPrevisto" Type="Decimal" Precision="37" Scale="2" />
+          <Property Name="ValorFinal" Type="Decimal" Precision="37" Scale="2" Nullable="false" />
+          <Property Name="ValorMulta" Type="Decimal" Precision="37" Scale="2" />
+          <Property Name="ValorDesconto" Type="Decimal" Precision="37" Scale="2" />
+          <Property Name="Is_Encerrado" Type="Boolean" />
+          <NavigationProperty Name="Loc_Cliente" Relationship="Self.FK_Cliente_Aluguel" FromRole="Loc_Aluguel" ToRole="Loc_Cliente" />
+          <NavigationProperty Name="Loc_Funcionario" Relationship="Self.FK_Funcionario_Aluguel" FromRole="Loc_Aluguel" ToRole="Loc_Funcionario" />
+          <NavigationProperty Name="Loc_Veiculo" Relationship="Self.FK_Veiculo_Aluguel" FromRole="Loc_Aluguel" ToRole="Loc_Veiculo" />
+        </EntityType>
+        <EntityType Name="Loc_Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RG" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Is_Especial" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Loc_Aluguel" Relationship="Self.FK_Cliente_Aluguel" FromRole="Loc_Cliente" ToRole="Loc_Aluguel" />
+          <NavigationProperty Name="Loc_EnderecoCliente" Relationship="Self.FK_Endereco_Cliente" FromRole="Loc_Cliente" ToRole="Loc_EnderecoCliente" />
+        </EntityType>
+        <EntityType Name="Loc_EnderecoCliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Logradouro" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="Bairro" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Complemento" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Cidade" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EstadoUF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CEP" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Loc_ClienteId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Loc_Cliente" Relationship="Self.FK_Endereco_Cliente" FromRole="Loc_EnderecoCliente" ToRole="Loc_Cliente" />
+        </EntityType>
+        <EntityType Name="Loc_Funcionario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Loc_Aluguel" Relationship="Self.FK_Funcionario_Aluguel" FromRole="Loc_Funcionario" ToRole="Loc_Aluguel" />
+        </EntityType>
+        <EntityType Name="Loc_Marca">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Loc_Veiculo" Relationship="Self.FK_Marca_Veiculo" FromRole="Loc_Marca" ToRole="Loc_Veiculo" />
+        </EntityType>
+        <EntityType Name="Loc_TipoVeiculo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Loc_Veiculo" Relationship="Self.FK_Tipo_Veiculo" FromRole="Loc_TipoVeiculo" ToRole="Loc_Veiculo" />
+        </EntityType>
+        <EntityType Name="Loc_Veiculo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Modelo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MarcaId" Type="Int64" Nullable="false" />
+          <Property Name="Ano" Type="Int32" Nullable="false" />
+          <Property Name="Cor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Placa" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Quilometragem" Type="Int32" />
+          <Property Name="ValorDiaria" Type="Decimal" Precision="37" Scale="2" Nullable="false" />
+          <Property Name="Is_Disponivel" Type="Boolean" />
+          <Property Name="TipoVeiculoId" Type="Int64" />
+          <NavigationProperty Name="Loc_Aluguel" Relationship="Self.FK_Veiculo_Aluguel" FromRole="Loc_Veiculo" ToRole="Loc_Aluguel" />
+          <NavigationProperty Name="Loc_Marca" Relationship="Self.FK_Marca_Veiculo" FromRole="Loc_Veiculo" ToRole="Loc_Marca" />
+          <NavigationProperty Name="Loc_TipoVeiculo" Relationship="Self.FK_Tipo_Veiculo" FromRole="Loc_Veiculo" ToRole="Loc_TipoVeiculo" />
+        </EntityType>
+        <EntityType Name="OSSYS_TENANT">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Is_Active" Type="Boolean" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EST_ANEXO_LANCAMENTO" Relationship="Self.FK__EST_ANEXO__TENAN__41EDCAC5" FromRole="OSSYS_TENANT" ToRole="EST_ANEXO_LANCAMENTO" />
+          <NavigationProperty Name="EST_HISTORICO_LANCAMENTO" Relationship="Self.FK__EST_HISTO__TENAN__489AC854" FromRole="OSSYS_TENANT" ToRole="EST_HISTORICO_LANCAMENTO" />
+          <NavigationProperty Name="EST_HISTORICO_PRECO" Relationship="Self.FK__EST_HISTO__TENAN__3C34F16F" FromRole="OSSYS_TENANT" ToRole="EST_HISTORICO_PRECO" />
+          <NavigationProperty Name="EST_LANCAMENTO" Relationship="Self.FK__EST_LANCA__TENAN__1BC821DD" FromRole="OSSYS_TENANT" ToRole="EST_LANCAMENTO" />
+          <NavigationProperty Name="EST_LOG_AUDITORIA" Relationship="Self.FK__EST_LOG_A__TENAN__37703C52" FromRole="OSSYS_TENANT" ToRole="EST_LOG_AUDITORIA" />
+          <NavigationProperty Name="EST_PESSOA" Relationship="Self.FK__EST_PESSO__TENAN__09A971A2" FromRole="OSSYS_TENANT" ToRole="EST_PESSOA" />
+          <NavigationProperty Name="EST_PRODUTO" Relationship="Self.FK__EST_PRODU__TENAN__14270015" FromRole="OSSYS_TENANT" ToRole="EST_PRODUTO" />
+          <NavigationProperty Name="INFRAUSUARIO" Relationship="Self.FRK_INFRAUSUARIO_TENANT" FromRole="OSSYS_TENANT" ToRole="INFRAUSUARIO" />
+        </EntityType>
+        <EntityType Name="CRPGRUPO">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="IDCRPGRUPO" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="IDCRPGRUPO" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ISGRUPOFINAL" Type="Boolean" />
+          <Property Name="NUMERONIVEL" Type="Int32" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="IS_CATALOGO" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="INFRAAUTHENTICATION">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INFRAINAUTHTYPEID" Type="Int64" />
+          <Property Name="IS_2FAENABLED" Type="Boolean" />
+          <Property Name="INFRAIN2FATYPEID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="INFRAEMAILCFG">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SMTPSERVER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SMTPPORT" Type="Int32" />
+          <Property Name="TIMEOUT" Type="Int32" />
+          <Property Name="USERNAME" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NOMEREMET" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EMAILADRESS" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IS_SSL" Type="Boolean" />
+          <Property Name="IS_TLS" Type="Boolean" />
+          <Property Name="IS_AUTHENTICATED" Type="Boolean" />
+          <Property Name="CONFIRMLEIT" Type="Boolean" />
+          <Property Name="CONFIRMENTREG" Type="Boolean" />
+          <Property Name="IMAPSERVER" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMAPPORT" Type="Int32" />
+          <Property Name="INFRAESTABID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD_ANG" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="URLSERVIDOR" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="INFRAGRUPO">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="INFRAIN2FATYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="NOME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ORDEM" Type="Int32" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="INFRAINAUTHTYPE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" />
+          <Property Name="NOME" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CODIGO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ORDEM" Type="Int32" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="InfraLogRecupSenha">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INFRAUSUARIOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="GUID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="DTALTERACAO" Type="DateTime" Precision="3" />
+          <Property Name="DTSOLICITACAO" Type="DateTime" Precision="3" />
+          <Property Name="IS_EFETIVADO" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="INFRASEGCONFIG">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IS_LETRASMAIUSCULAS" Type="Boolean" />
+          <Property Name="IS_NUMEROS" Type="Boolean" />
+          <Property Name="IS_CARACTERESESPECIAIS" Type="Boolean" />
+          <Property Name="QTNINATIVIDADE" Type="Int32" />
+          <Property Name="QTNTROCASENHA" Type="Int32" />
+          <Property Name="QTNTENTATIVA" Type="Int32" />
+          <Property Name="QTNREPETICAO" Type="Int32" />
+          <Property Name="QTNMINIMA" Type="Int32" />
+          <Property Name="IS_DROPSESSION" Type="Boolean" />
+          <Property Name="LEVEL" Type="Int32" />
+        </EntityType>
+        <EntityType Name="INFRAUSUARIO_IMG">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMAGEM" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FILENAME" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DATACRIACAO" Type="DateTime" Precision="3" />
+          <Property Name="IS_ACTIVE" Type="Boolean" />
+          <Property Name="USUARIOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="INFRAUSUARIOLOG1">
+          <Key>
+            <PropertyRef Name="TENANT_ID" />
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="TENANT_ID" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INFRAUSUARIOID" Type="String" MaxLength="36" FixedLength="false" Unicode="true" />
+          <Property Name="DATETIME" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__EST_ANEXO__LANCA__42E1EEFE">
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="1" />
+          <End Role="EST_ANEXO_LANCAMENTO" Type="Self.EST_ANEXO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_LANCAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_ANEXO_LANCAMENTO">
+              <PropertyRef Name="LANCAMENTOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ANEXO__TENAN__41EDCAC5">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_ANEXO_LANCAMENTO" Type="Self.EST_ANEXO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_ANEXO_LANCAMENTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ANEXO__USUAR__44CA3770">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="0..1" />
+          <End Role="EST_ANEXO_LANCAMENTO" Type="Self.EST_ANEXO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_ANEXO_LANCAMENTO">
+              <PropertyRef Name="USUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__CATEG__151B244E">
+          <End Role="EST_CATEGORIAPRODUTO" Type="Self.EST_CATEGORIAPRODUTO" Multiplicity="0..1" />
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_CATEGORIAPRODUTO">
+              <PropertyRef Name="CD_CATEGORIAPRODUTO" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO">
+              <PropertyRef Name="CATEGORIA_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_CONTA__PESSO__114A936A">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_CONTATO" Type="Self.EST_CONTATO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_CONTATO">
+              <PropertyRef Name="PESSOA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ENDER__PESSO__282DF8C2">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="0..1" />
+          <End Role="EST_ENDERECO" Type="Self.EST_ENDERECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_ENDERECO">
+              <PropertyRef Name="PESSOA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ENDER__TIPOE__2A164134">
+          <End Role="EST_TIPOENDERECO" Type="Self.EST_TIPOENDERECO" Multiplicity="0..1" />
+          <End Role="EST_ENDERECO" Type="Self.EST_ENDERECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_TIPOENDERECO">
+              <PropertyRef Name="CD_TIPOENDERECO" />
+            </Principal>
+            <Dependent Role="EST_ENDERECO">
+              <PropertyRef Name="TIPOENDERECO_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_ENDERECO__UF__29221CFB">
+          <End Role="EST_UF" Type="Self.EST_UF" Multiplicity="1" />
+          <End Role="EST_ENDERECO" Type="Self.EST_ENDERECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_UF">
+              <PropertyRef Name="CD_UF" />
+            </Principal>
+            <Dependent Role="EST_ENDERECO">
+              <PropertyRef Name="UF" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__LANCA__498EEC8D">
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="1" />
+          <End Role="EST_HISTORICO_LANCAMENTO" Type="Self.EST_HISTORICO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_LANCAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_LANCAMENTO">
+              <PropertyRef Name="LANCAMENTOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__TENAN__489AC854">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_HISTORICO_LANCAMENTO" Type="Self.EST_HISTORICO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_LANCAMENTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__USUAR__4B7734FF">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="1" />
+          <End Role="EST_HISTORICO_LANCAMENTO" Type="Self.EST_HISTORICO_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_LANCAMENTO">
+              <PropertyRef Name="USUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__PRODU__3D2915A8">
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="1" />
+          <End Role="EST_HISTORICO_PRECO" Type="Self.EST_HISTORICO_PRECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_PRECO">
+              <PropertyRef Name="PRODUTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_HISTO__TENAN__3C34F16F">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_HISTORICO_PRECO" Type="Self.EST_HISTORICO_PRECO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_HISTORICO_PRECO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__ESTAB__2180FB33">
+          <End Role="INFRAESTABELECIMENTO" Type="Self.INFRAESTABELECIMENTO" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAESTABELECIMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="ESTABELECIMENTOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__PESSO__1DB06A4F">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="PESSOA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__PESSO__245D67DE">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="PESSOA_REMETENTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__PESSO__25518C17">
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PESSOA">
+              <PropertyRef Name="ID_PESSOA" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="PESSOA_DESTINATARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__SITUA__1F98B2C1">
+          <End Role="EST_SITUACAOLANCAMENTO" Type="Self.EST_SITUACAOLANCAMENTO" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_SITUACAOLANCAMENTO">
+              <PropertyRef Name="CD_SITUACAOLANCAMENTO" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="SITUACAO_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__TENAN__1BC821DD">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LANCA__TIPOL__1CBC4616">
+          <End Role="EST_TIPOLANCAMENTO" Type="Self.EST_TIPOLANCAMENTO" Multiplicity="1" />
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_TIPOLANCAMENTO">
+              <PropertyRef Name="CD_TIPO" />
+            </Principal>
+            <Dependent Role="EST_LANCAMENTO">
+              <PropertyRef Name="TIPOLANCAMENTO_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__LANCA__11158940">
+          <End Role="EST_LANCAMENTO" Type="Self.EST_LANCAMENTO" Multiplicity="1" />
+          <End Role="EST_PRODUTO_LANCTO" Type="Self.EST_PRODUTO_LANCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_LANCAMENTO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO_LANCTO">
+              <PropertyRef Name="LANCAMENTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LOG_A__INFRA__395884C4">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="1" />
+          <End Role="EST_LOG_AUDITORIA" Type="Self.EST_LOG_AUDITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LOG_AUDITORIA">
+              <PropertyRef Name="INFRAUSUARIO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_LOG_A__TENAN__37703C52">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_LOG_AUDITORIA" Type="Self.EST_LOG_AUDITORIA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_LOG_AUDITORIA">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PESSO__PAPEL__0B91BA14">
+          <End Role="EST_PAPEL" Type="Self.EST_PAPEL" Multiplicity="1" />
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PAPEL">
+              <PropertyRef Name="CD_PAPEL" />
+            </Principal>
+            <Dependent Role="EST_PESSOA">
+              <PropertyRef Name="PAPEL_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PESSO__TENAN__09A971A2">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_PESSOA">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PESSO__TIPOP__0A9D95DB">
+          <End Role="EST_TIPOPESSOA" Type="Self.EST_TIPOPESSOA" Multiplicity="1" />
+          <End Role="EST_PESSOA" Type="Self.EST_PESSOA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_TIPOPESSOA">
+              <PropertyRef Name="CD_TIPOPESSOA" />
+            </Principal>
+            <Dependent Role="EST_PESSOA">
+              <PropertyRef Name="TIPOPESSOA_CD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__PRODU__0F2D40CE">
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="1" />
+          <End Role="EST_PRODUTO_LANCTO" Type="Self.EST_PRODUTO_LANCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EST_PRODUTO">
+              <PropertyRef Name="ID_PRODUTO" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO_LANCTO">
+              <PropertyRef Name="PRODUTO_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EST_PRODU__TENAN__14270015">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="1" />
+          <End Role="EST_PRODUTO" Type="Self.EST_PRODUTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EST_PRODUTO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID">
+          <End Role="INFRAEMPRESA" Type="Self.INFRAEMPRESA" Multiplicity="0..1" />
+          <End Role="INFRAESTABELECIMENTO" Type="Self.INFRAESTABELECIMENTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAEMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAESTABELECIMENTO">
+              <PropertyRef Name="EMPRESAID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID">
+          <End Role="INFRAMNUMENU" Type="Self.INFRAMNUMENU" Multiplicity="0..1" />
+          <End Role="INFRAMNUMENUUSUARIO" Type="Self.INFRAMNUMENUUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAMNUMENU">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAMNUMENUUSUARIO">
+              <PropertyRef Name="MENUID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="0..1" />
+          <End Role="INFRAMNUMENUUSUARIO" Type="Self.INFRAMNUMENUUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAMNUMENUUSUARIO">
+              <PropertyRef Name="USUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FRK_INFRAUSUARIO_TENANT">
+          <End Role="OSSYS_TENANT" Type="Self.OSSYS_TENANT" Multiplicity="0..1" />
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OSSYS_TENANT">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAUSUARIO">
+              <PropertyRef Name="TENANT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID">
+          <End Role="INFRAUSUARIO" Type="Self.INFRAUSUARIO" Multiplicity="0..1" />
+          <End Role="INFRAUSUARIOSENHASLOG" Type="Self.INFRAUSUARIOSENHASLOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INFRAUSUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="INFRAUSUARIOSENHASLOG">
+              <PropertyRef Name="INFRAUSUARIOID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Aluguel">
+          <End Role="Loc_Cliente" Type="Self.Loc_Cliente" Multiplicity="1" />
+          <End Role="Loc_Aluguel" Type="Self.Loc_Aluguel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Aluguel">
+              <PropertyRef Name="Loc_ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Funcionario_Aluguel">
+          <End Role="Loc_Funcionario" Type="Self.Loc_Funcionario" Multiplicity="1" />
+          <End Role="Loc_Aluguel" Type="Self.Loc_Aluguel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Funcionario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Aluguel">
+              <PropertyRef Name="Loc_FuncionarioId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Veiculo_Aluguel">
+          <End Role="Loc_Veiculo" Type="Self.Loc_Veiculo" Multiplicity="1" />
+          <End Role="Loc_Aluguel" Type="Self.Loc_Aluguel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Veiculo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Aluguel">
+              <PropertyRef Name="Loc_VeiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Endereco_Cliente">
+          <End Role="Loc_Cliente" Type="Self.Loc_Cliente" Multiplicity="1" />
+          <End Role="Loc_EnderecoCliente" Type="Self.Loc_EnderecoCliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_EnderecoCliente">
+              <PropertyRef Name="Loc_ClienteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Marca_Veiculo">
+          <End Role="Loc_Marca" Type="Self.Loc_Marca" Multiplicity="1" />
+          <End Role="Loc_Veiculo" Type="Self.Loc_Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_Marca">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Veiculo">
+              <PropertyRef Name="MarcaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tipo_Veiculo">
+          <End Role="Loc_TipoVeiculo" Type="Self.Loc_TipoVeiculo" Multiplicity="0..1" />
+          <End Role="Loc_Veiculo" Type="Self.Loc_Veiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Loc_TipoVeiculo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Loc_Veiculo">
+              <PropertyRef Name="TipoVeiculoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ESTAGIOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EST_ANEXO_LANCAMENTO" EntityType="Self.EST_ANEXO_LANCAMENTO" />
+          <EntitySet Name="EST_CATEGORIAPRODUTO" EntityType="Self.EST_CATEGORIAPRODUTO" />
+          <EntitySet Name="EST_CONTATO" EntityType="Self.EST_CONTATO" />
+          <EntitySet Name="EST_ENDERECO" EntityType="Self.EST_ENDERECO" />
+          <EntitySet Name="EST_HISTORICO_LANCAMENTO" EntityType="Self.EST_HISTORICO_LANCAMENTO" />
+          <EntitySet Name="EST_HISTORICO_PRECO" EntityType="Self.EST_HISTORICO_PRECO" />
+          <EntitySet Name="EST_LANCAMENTO" EntityType="Self.EST_LANCAMENTO" />
+          <EntitySet Name="EST_LOG_AUDITORIA" EntityType="Self.EST_LOG_AUDITORIA" />
+          <EntitySet Name="EST_PAPEL" EntityType="Self.EST_PAPEL" />
+          <EntitySet Name="EST_PESSOA" EntityType="Self.EST_PESSOA" />
+          <EntitySet Name="EST_PRODUTO" EntityType="Self.EST_PRODUTO" />
+          <EntitySet Name="EST_PRODUTO_LANCTO" EntityType="Self.EST_PRODUTO_LANCTO" />
+          <EntitySet Name="EST_SITUACAOLANCAMENTO" EntityType="Self.EST_SITUACAOLANCAMENTO" />
+          <EntitySet Name="EST_TIPOENDERECO" EntityType="Self.EST_TIPOENDERECO" />
+          <EntitySet Name="EST_TIPOLANCAMENTO" EntityType="Self.EST_TIPOLANCAMENTO" />
+          <EntitySet Name="EST_TIPOPESSOA" EntityType="Self.EST_TIPOPESSOA" />
+          <EntitySet Name="EST_UF" EntityType="Self.EST_UF" />
+          <EntitySet Name="INFRAEMPRESA" EntityType="Self.INFRAEMPRESA" />
+          <EntitySet Name="INFRAESTABELECIMENTO" EntityType="Self.INFRAESTABELECIMENTO" />
+          <EntitySet Name="INFRAMNUMENU" EntityType="Self.INFRAMNUMENU" />
+          <EntitySet Name="INFRAMNUMENUUSUARIO" EntityType="Self.INFRAMNUMENUUSUARIO" />
+          <EntitySet Name="INFRAUSUARIO" EntityType="Self.INFRAUSUARIO" />
+          <EntitySet Name="INFRAUSUARIOSENHASLOG" EntityType="Self.INFRAUSUARIOSENHASLOG" />
+          <EntitySet Name="Loc_Aluguel" EntityType="Self.Loc_Aluguel" />
+          <EntitySet Name="Loc_Cliente" EntityType="Self.Loc_Cliente" />
+          <EntitySet Name="Loc_EnderecoCliente" EntityType="Self.Loc_EnderecoCliente" />
+          <EntitySet Name="Loc_Funcionario" EntityType="Self.Loc_Funcionario" />
+          <EntitySet Name="Loc_Marca" EntityType="Self.Loc_Marca" />
+          <EntitySet Name="Loc_TipoVeiculo" EntityType="Self.Loc_TipoVeiculo" />
+          <EntitySet Name="Loc_Veiculo" EntityType="Self.Loc_Veiculo" />
+          <EntitySet Name="OSSYS_TENANT" EntityType="Self.OSSYS_TENANT" />
+          <EntitySet Name="CRPGRUPO" EntityType="Self.CRPGRUPO" />
+          <EntitySet Name="INFRAAUTHENTICATION" EntityType="Self.INFRAAUTHENTICATION" />
+          <EntitySet Name="INFRAEMAILCFG" EntityType="Self.INFRAEMAILCFG" />
+          <EntitySet Name="INFRAGRUPO" EntityType="Self.INFRAGRUPO" />
+          <EntitySet Name="INFRAIN2FATYPE" EntityType="Self.INFRAIN2FATYPE" />
+          <EntitySet Name="INFRAINAUTHTYPE" EntityType="Self.INFRAINAUTHTYPE" />
+          <EntitySet Name="InfraLogRecupSenha" EntityType="Self.InfraLogRecupSenha" />
+          <EntitySet Name="INFRASEGCONFIG" EntityType="Self.INFRASEGCONFIG" />
+          <EntitySet Name="INFRAUSUARIO_IMG" EntityType="Self.INFRAUSUARIO_IMG" />
+          <EntitySet Name="INFRAUSUARIOLOG1" EntityType="Self.INFRAUSUARIOLOG1" />
+          <AssociationSet Name="FK__EST_ANEXO__LANCA__42E1EEFE" Association="Self.FK__EST_ANEXO__LANCA__42E1EEFE">
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+            <End Role="EST_ANEXO_LANCAMENTO" EntitySet="EST_ANEXO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ANEXO__TENAN__41EDCAC5" Association="Self.FK__EST_ANEXO__TENAN__41EDCAC5">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_ANEXO_LANCAMENTO" EntitySet="EST_ANEXO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ANEXO__USUAR__44CA3770" Association="Self.FK__EST_ANEXO__USUAR__44CA3770">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="EST_ANEXO_LANCAMENTO" EntitySet="EST_ANEXO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__CATEG__151B244E" Association="Self.FK__EST_PRODU__CATEG__151B244E">
+            <End Role="EST_CATEGORIAPRODUTO" EntitySet="EST_CATEGORIAPRODUTO" />
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_CONTA__PESSO__114A936A" Association="Self.FK__EST_CONTA__PESSO__114A936A">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_CONTATO" EntitySet="EST_CONTATO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ENDER__PESSO__282DF8C2" Association="Self.FK__EST_ENDER__PESSO__282DF8C2">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_ENDERECO" EntitySet="EST_ENDERECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ENDER__TIPOE__2A164134" Association="Self.FK__EST_ENDER__TIPOE__2A164134">
+            <End Role="EST_TIPOENDERECO" EntitySet="EST_TIPOENDERECO" />
+            <End Role="EST_ENDERECO" EntitySet="EST_ENDERECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_ENDERECO__UF__29221CFB" Association="Self.FK__EST_ENDERECO__UF__29221CFB">
+            <End Role="EST_UF" EntitySet="EST_UF" />
+            <End Role="EST_ENDERECO" EntitySet="EST_ENDERECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__LANCA__498EEC8D" Association="Self.FK__EST_HISTO__LANCA__498EEC8D">
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+            <End Role="EST_HISTORICO_LANCAMENTO" EntitySet="EST_HISTORICO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__TENAN__489AC854" Association="Self.FK__EST_HISTO__TENAN__489AC854">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_HISTORICO_LANCAMENTO" EntitySet="EST_HISTORICO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__USUAR__4B7734FF" Association="Self.FK__EST_HISTO__USUAR__4B7734FF">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="EST_HISTORICO_LANCAMENTO" EntitySet="EST_HISTORICO_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__PRODU__3D2915A8" Association="Self.FK__EST_HISTO__PRODU__3D2915A8">
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+            <End Role="EST_HISTORICO_PRECO" EntitySet="EST_HISTORICO_PRECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_HISTO__TENAN__3C34F16F" Association="Self.FK__EST_HISTO__TENAN__3C34F16F">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_HISTORICO_PRECO" EntitySet="EST_HISTORICO_PRECO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__ESTAB__2180FB33" Association="Self.FK__EST_LANCA__ESTAB__2180FB33">
+            <End Role="INFRAESTABELECIMENTO" EntitySet="INFRAESTABELECIMENTO" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__PESSO__1DB06A4F" Association="Self.FK__EST_LANCA__PESSO__1DB06A4F">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__PESSO__245D67DE" Association="Self.FK__EST_LANCA__PESSO__245D67DE">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__PESSO__25518C17" Association="Self.FK__EST_LANCA__PESSO__25518C17">
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__SITUA__1F98B2C1" Association="Self.FK__EST_LANCA__SITUA__1F98B2C1">
+            <End Role="EST_SITUACAOLANCAMENTO" EntitySet="EST_SITUACAOLANCAMENTO" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__TENAN__1BC821DD" Association="Self.FK__EST_LANCA__TENAN__1BC821DD">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LANCA__TIPOL__1CBC4616" Association="Self.FK__EST_LANCA__TIPOL__1CBC4616">
+            <End Role="EST_TIPOLANCAMENTO" EntitySet="EST_TIPOLANCAMENTO" />
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__LANCA__11158940" Association="Self.FK__EST_PRODU__LANCA__11158940">
+            <End Role="EST_LANCAMENTO" EntitySet="EST_LANCAMENTO" />
+            <End Role="EST_PRODUTO_LANCTO" EntitySet="EST_PRODUTO_LANCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LOG_A__INFRA__395884C4" Association="Self.FK__EST_LOG_A__INFRA__395884C4">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="EST_LOG_AUDITORIA" EntitySet="EST_LOG_AUDITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_LOG_A__TENAN__37703C52" Association="Self.FK__EST_LOG_A__TENAN__37703C52">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_LOG_AUDITORIA" EntitySet="EST_LOG_AUDITORIA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PESSO__PAPEL__0B91BA14" Association="Self.FK__EST_PESSO__PAPEL__0B91BA14">
+            <End Role="EST_PAPEL" EntitySet="EST_PAPEL" />
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PESSO__TENAN__09A971A2" Association="Self.FK__EST_PESSO__TENAN__09A971A2">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PESSO__TIPOP__0A9D95DB" Association="Self.FK__EST_PESSO__TIPOP__0A9D95DB">
+            <End Role="EST_TIPOPESSOA" EntitySet="EST_TIPOPESSOA" />
+            <End Role="EST_PESSOA" EntitySet="EST_PESSOA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__PRODU__0F2D40CE" Association="Self.FK__EST_PRODU__PRODU__0F2D40CE">
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+            <End Role="EST_PRODUTO_LANCTO" EntitySet="EST_PRODUTO_LANCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EST_PRODU__TENAN__14270015" Association="Self.FK__EST_PRODU__TENAN__14270015">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="EST_PRODUTO" EntitySet="EST_PRODUTO" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID" Association="Self.OSFRK_OSUSR_RQ1_INFRAESTABELECIMENTO_OSUSR_RQ1_INFRAEMPRESA_EMPRESAID">
+            <End Role="INFRAEMPRESA" EntitySet="INFRAEMPRESA" />
+            <End Role="INFRAESTABELECIMENTO" EntitySet="INFRAESTABELECIMENTO" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID" Association="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAMNUMENU_MENUID">
+            <End Role="INFRAMNUMENU" EntitySet="INFRAMNUMENU" />
+            <End Role="INFRAMNUMENUUSUARIO" EntitySet="INFRAMNUMENUUSUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID" Association="Self.OSFRK_OSUSR_RQ1_INFRAMNUMENUUSUARIO_OSUSR_RQ1_INFRAUSUARIO_USUARIOID">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="INFRAMNUMENUUSUARIO" EntitySet="INFRAMNUMENUUSUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FRK_INFRAUSUARIO_TENANT" Association="Self.FRK_INFRAUSUARIO_TENANT">
+            <End Role="OSSYS_TENANT" EntitySet="OSSYS_TENANT" />
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID" Association="Self.OSFRK_INFRAUSUARIOSENHASLOG_INFRAUSUARIO_INFRAUSUARIOID">
+            <End Role="INFRAUSUARIO" EntitySet="INFRAUSUARIO" />
+            <End Role="INFRAUSUARIOSENHASLOG" EntitySet="INFRAUSUARIOSENHASLOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Aluguel" Association="Self.FK_Cliente_Aluguel">
+            <End Role="Loc_Cliente" EntitySet="Loc_Cliente" />
+            <End Role="Loc_Aluguel" EntitySet="Loc_Aluguel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Funcionario_Aluguel" Association="Self.FK_Funcionario_Aluguel">
+            <End Role="Loc_Funcionario" EntitySet="Loc_Funcionario" />
+            <End Role="Loc_Aluguel" EntitySet="Loc_Aluguel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Veiculo_Aluguel" Association="Self.FK_Veiculo_Aluguel">
+            <End Role="Loc_Veiculo" EntitySet="Loc_Veiculo" />
+            <End Role="Loc_Aluguel" EntitySet="Loc_Aluguel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Endereco_Cliente" Association="Self.FK_Endereco_Cliente">
+            <End Role="Loc_Cliente" EntitySet="Loc_Cliente" />
+            <End Role="Loc_EnderecoCliente" EntitySet="Loc_EnderecoCliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Marca_Veiculo" Association="Self.FK_Marca_Veiculo">
+            <End Role="Loc_Marca" EntitySet="Loc_Marca" />
+            <End Role="Loc_Veiculo" EntitySet="Loc_Veiculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tipo_Veiculo" Association="Self.FK_Tipo_Veiculo">
+            <End Role="Loc_TipoVeiculo" EntitySet="Loc_TipoVeiculo" />
+            <End Role="Loc_Veiculo" EntitySet="Loc_Veiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="ESTAGIOEntities">
+          <EntitySetMapping Name="EST_ANEXO_LANCAMENTO">
+            <EntityTypeMapping TypeName="Model.EST_ANEXO_LANCAMENTO">
+              <MappingFragment StoreEntitySet="EST_ANEXO_LANCAMENTO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID_ANEXO" ColumnName="ID_ANEXO" />
+                <ScalarProperty Name="LANCAMENTOID" ColumnName="LANCAMENTOID" />
+                <ScalarProperty Name="NOMEARQUIVO" ColumnName="NOMEARQUIVO" />
+                <ScalarProperty Name="ARQUIVO" ColumnName="ARQUIVO" />
+                <ScalarProperty Name="COMENTARIO" ColumnName="COMENTARIO" />
+                <ScalarProperty Name="DT_CRIACAO" ColumnName="DT_CRIACAO" />
+                <ScalarProperty Name="USUARIOID" ColumnName="USUARIOID" />
+                <ScalarProperty Name="IS_NFE" ColumnName="IS_NFE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_CATEGORIAPRODUTO">
+            <EntityTypeMapping TypeName="Model.EST_CATEGORIAPRODUTO">
+              <MappingFragment StoreEntitySet="EST_CATEGORIAPRODUTO">
+                <ScalarProperty Name="CD_CATEGORIAPRODUTO" ColumnName="CD_CATEGORIAPRODUTO" />
+                <ScalarProperty Name="TX_NOME" ColumnName="TX_NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_CONTATO">
+            <EntityTypeMapping TypeName="Model.EST_CONTATO">
+              <MappingFragment StoreEntitySet="EST_CONTATO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PESSOA_ID" ColumnName="PESSOA_ID" />
+                <ScalarProperty Name="TX_APELIDOCONTATO" ColumnName="TX_APELIDOCONTATO" />
+                <ScalarProperty Name="TX_EMAIL" ColumnName="TX_EMAIL" />
+                <ScalarProperty Name="TX_TELEFONEFIXO" ColumnName="TX_TELEFONEFIXO" />
+                <ScalarProperty Name="TX_CELULAR" ColumnName="TX_CELULAR" />
+                <ScalarProperty Name="TX_RAMAL" ColumnName="TX_RAMAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_ENDERECO">
+            <EntityTypeMapping TypeName="Model.EST_ENDERECO">
+              <MappingFragment StoreEntitySet="EST_ENDERECO">
+                <ScalarProperty Name="ID_ENDERECO" ColumnName="ID_ENDERECO" />
+                <ScalarProperty Name="PESSOA_ID" ColumnName="PESSOA_ID" />
+                <ScalarProperty Name="LOGRADOURO" ColumnName="LOGRADOURO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="COMPLEMENTO" ColumnName="COMPLEMENTO" />
+                <ScalarProperty Name="BAIRRO" ColumnName="BAIRRO" />
+                <ScalarProperty Name="CIDADE" ColumnName="CIDADE" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="TIPOENDERECO_CD" ColumnName="TIPOENDERECO_CD" />
+                <ScalarProperty Name="IS_PRINCIPAL" ColumnName="IS_PRINCIPAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_HISTORICO_LANCAMENTO">
+            <EntityTypeMapping TypeName="Model.EST_HISTORICO_LANCAMENTO">
+              <MappingFragment StoreEntitySet="EST_HISTORICO_LANCAMENTO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID_HISTORICO" ColumnName="ID_HISTORICO" />
+                <ScalarProperty Name="LANCAMENTOID" ColumnName="LANCAMENTOID" />
+                <ScalarProperty Name="TX_COMENTARIO" ColumnName="TX_COMENTARIO" />
+                <ScalarProperty Name="TX_ACAO_EXECUTADA" ColumnName="TX_ACAO_EXECUTADA" />
+                <ScalarProperty Name="DT_ENVIO" ColumnName="DT_ENVIO" />
+                <ScalarProperty Name="USUARIOID" ColumnName="USUARIOID" />
+                <ScalarProperty Name="IS_ORIGEM_SISTEMA" ColumnName="IS_ORIGEM_SISTEMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_HISTORICO_PRECO">
+            <EntityTypeMapping TypeName="Model.EST_HISTORICO_PRECO">
+              <MappingFragment StoreEntitySet="EST_HISTORICO_PRECO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID_HISTORICO" ColumnName="ID_HISTORICO" />
+                <ScalarProperty Name="PRODUTO_ID" ColumnName="PRODUTO_ID" />
+                <ScalarProperty Name="DT_VIGENCIA" ColumnName="DT_VIGENCIA" />
+                <ScalarProperty Name="VL_NOVOPRECO" ColumnName="VL_NOVOPRECO" />
+                <ScalarProperty Name="VL_PRECOANTERIOR" ColumnName="VL_PRECOANTERIOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_LANCAMENTO">
+            <EntityTypeMapping TypeName="Model.EST_LANCAMENTO">
+              <MappingFragment StoreEntitySet="EST_LANCAMENTO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TIPOLANCAMENTO_CD" ColumnName="TIPOLANCAMENTO_CD" />
+                <ScalarProperty Name="PESSOA_ID" ColumnName="PESSOA_ID" />
+                <ScalarProperty Name="TX_CODIGOBARRAS" ColumnName="TX_CODIGOBARRAS" />
+                <ScalarProperty Name="SITUACAO_CD" ColumnName="SITUACAO_CD" />
+                <ScalarProperty Name="DT_LANCAMENTO" ColumnName="DT_LANCAMENTO" />
+                <ScalarProperty Name="VL_LANCAMENTO" ColumnName="VL_LANCAMENTO" />
+                <ScalarProperty Name="DT_PAGAMENTO" ColumnName="DT_PAGAMENTO" />
+                <ScalarProperty Name="TX_DESCRICAO" ColumnName="TX_DESCRICAO" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="ESTABELECIMENTOID" ColumnName="ESTABELECIMENTOID" />
+                <ScalarProperty Name="VL_DESCONTO" ColumnName="VL_DESCONTO" />
+                <ScalarProperty Name="VL_IMPOSTO" ColumnName="VL_IMPOSTO" />
+                <ScalarProperty Name="DT_VENCIMENTO" ColumnName="DT_VENCIMENTO" />
+                <ScalarProperty Name="PESSOA_REMETENTE_ID" ColumnName="PESSOA_REMETENTE_ID" />
+                <ScalarProperty Name="PESSOA_DESTINATARIO_ID" ColumnName="PESSOA_DESTINATARIO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_LOG_AUDITORIA">
+            <EntityTypeMapping TypeName="Model.EST_LOG_AUDITORIA">
+              <MappingFragment StoreEntitySet="EST_LOG_AUDITORIA">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID_LOG" ColumnName="ID_LOG" />
+                <ScalarProperty Name="TX_TABELA" ColumnName="TX_TABELA" />
+                <ScalarProperty Name="TX_ACAOREALIZADA" ColumnName="TX_ACAOREALIZADA" />
+                <ScalarProperty Name="DT_ACAOREALIZADA" ColumnName="DT_ACAOREALIZADA" />
+                <ScalarProperty Name="TX_DESCRICAODETALHADA" ColumnName="TX_DESCRICAODETALHADA" />
+                <ScalarProperty Name="INFRAUSUARIO_ID" ColumnName="INFRAUSUARIO_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_PAPEL">
+            <EntityTypeMapping TypeName="Model.EST_PAPEL">
+              <MappingFragment StoreEntitySet="EST_PAPEL">
+                <ScalarProperty Name="CD_PAPEL" ColumnName="CD_PAPEL" />
+                <ScalarProperty Name="TX_NOME" ColumnName="TX_NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_PESSOA">
+            <EntityTypeMapping TypeName="Model.EST_PESSOA">
+              <MappingFragment StoreEntitySet="EST_PESSOA">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID_PESSOA" ColumnName="ID_PESSOA" />
+                <ScalarProperty Name="TX_NOMEPESSOA" ColumnName="TX_NOMEPESSOA" />
+                <ScalarProperty Name="TIPOPESSOA_CD" ColumnName="TIPOPESSOA_CD" />
+                <ScalarProperty Name="PAPEL_CD" ColumnName="PAPEL_CD" />
+                <ScalarProperty Name="TX_DOCUMENTO" ColumnName="TX_DOCUMENTO" />
+                <ScalarProperty Name="DT_NASCIMENTO" ColumnName="DT_NASCIMENTO" />
+                <ScalarProperty Name="DT_FUNDACAO" ColumnName="DT_FUNDACAO" />
+                <ScalarProperty Name="DT_INICIOVINCULO" ColumnName="DT_INICIOVINCULO" />
+                <ScalarProperty Name="DT_CRIACAO" ColumnName="DT_CRIACAO" />
+                <ScalarProperty Name="DT_ULTIMAALTERACAO" ColumnName="DT_ULTIMAALTERACAO" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_ESTRANGEIRO" ColumnName="IS_ESTRANGEIRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_PRODUTO">
+            <EntityTypeMapping TypeName="Model.EST_PRODUTO">
+              <MappingFragment StoreEntitySet="EST_PRODUTO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID_PRODUTO" ColumnName="ID_PRODUTO" />
+                <ScalarProperty Name="TX_NOME" ColumnName="TX_NOME" />
+                <ScalarProperty Name="TX_DESCRICAO" ColumnName="TX_DESCRICAO" />
+                <ScalarProperty Name="CATEGORIA_CD" ColumnName="CATEGORIA_CD" />
+                <ScalarProperty Name="QT_MINIMA" ColumnName="QT_MINIMA" />
+                <ScalarProperty Name="QT_ATUAL" ColumnName="QT_ATUAL" />
+                <ScalarProperty Name="VL_PRECO_RECOMENDADO" ColumnName="VL_PRECO_RECOMENDADO" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_PRODUTO_LANCTO">
+            <EntityTypeMapping TypeName="Model.EST_PRODUTO_LANCTO">
+              <MappingFragment StoreEntitySet="EST_PRODUTO_LANCTO">
+                <ScalarProperty Name="ID_PRODUTOLANCAMENTO" ColumnName="ID_PRODUTOLANCAMENTO" />
+                <ScalarProperty Name="PRODUTO_ID" ColumnName="PRODUTO_ID" />
+                <ScalarProperty Name="LANCAMENTO_ID" ColumnName="LANCAMENTO_ID" />
+                <ScalarProperty Name="QT_PRODUTO" ColumnName="QT_PRODUTO" />
+                <ScalarProperty Name="DT_PEDIDO" ColumnName="DT_PEDIDO" />
+                <ScalarProperty Name="VL_TOTAL" ColumnName="VL_TOTAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_SITUACAOLANCAMENTO">
+            <EntityTypeMapping TypeName="Model.EST_SITUACAOLANCAMENTO">
+              <MappingFragment StoreEntitySet="EST_SITUACAOLANCAMENTO">
+                <ScalarProperty Name="CD_SITUACAOLANCAMENTO" ColumnName="CD_SITUACAOLANCAMENTO" />
+                <ScalarProperty Name="TX_NOME" ColumnName="TX_NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_TIPOENDERECO">
+            <EntityTypeMapping TypeName="Model.EST_TIPOENDERECO">
+              <MappingFragment StoreEntitySet="EST_TIPOENDERECO">
+                <ScalarProperty Name="CD_TIPOENDERECO" ColumnName="CD_TIPOENDERECO" />
+                <ScalarProperty Name="TX_TIPOENDERECO" ColumnName="TX_TIPOENDERECO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_TIPOLANCAMENTO">
+            <EntityTypeMapping TypeName="Model.EST_TIPOLANCAMENTO">
+              <MappingFragment StoreEntitySet="EST_TIPOLANCAMENTO">
+                <ScalarProperty Name="CD_TIPO" ColumnName="CD_TIPO" />
+                <ScalarProperty Name="TX_TIPOLANCAMENTO" ColumnName="TX_TIPOLANCAMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_TIPOPESSOA">
+            <EntityTypeMapping TypeName="Model.EST_TIPOPESSOA">
+              <MappingFragment StoreEntitySet="EST_TIPOPESSOA">
+                <ScalarProperty Name="CD_TIPOPESSOA" ColumnName="CD_TIPOPESSOA" />
+                <ScalarProperty Name="TX_TIPOPESSOA" ColumnName="TX_TIPOPESSOA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EST_UF">
+            <EntityTypeMapping TypeName="Model.EST_UF">
+              <MappingFragment StoreEntitySet="EST_UF">
+                <ScalarProperty Name="CD_UF" ColumnName="CD_UF" />
+                <ScalarProperty Name="TX_NOME" ColumnName="TX_NOME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAEMPRESA">
+            <EntityTypeMapping TypeName="Model.INFRAEMPRESA">
+              <MappingFragment StoreEntitySet="INFRAEMPRESA">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAESTABELECIMENTO">
+            <EntityTypeMapping TypeName="Model.INFRAESTABELECIMENTO">
+              <MappingFragment StoreEntitySet="INFRAESTABELECIMENTO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMEEXIBICAO" ColumnName="NOMEEXIBICAO" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="RAZAOSOCIAL" ColumnName="RAZAOSOCIAL" />
+                <ScalarProperty Name="NOMEFANTASIA" ColumnName="NOMEFANTASIA" />
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+                <ScalarProperty Name="IS_MATRIZ" ColumnName="IS_MATRIZ" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="EMPRESAID" ColumnName="EMPRESAID" />
+                <ScalarProperty Name="IDIOMAID" ColumnName="IDIOMAID" />
+                <ScalarProperty Name="AVISOINICIAL" ColumnName="AVISOINICIAL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAMNUMENU">
+            <EntityTypeMapping TypeName="Model.INFRAMNUMENU">
+              <MappingFragment StoreEntitySet="INFRAMNUMENU">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UNICOID" ColumnName="UNICOID" />
+                <ScalarProperty Name="LABEL" ColumnName="LABEL" />
+                <ScalarProperty Name="LABEL_ENGLISH" ColumnName="LABEL_ENGLISH" />
+                <ScalarProperty Name="LABEL_SPANISH" ColumnName="LABEL_SPANISH" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="DESCRICAO_ENGLISH" ColumnName="DESCRICAO_ENGLISH" />
+                <ScalarProperty Name="DESCRICAO_SPANISH" ColumnName="DESCRICAO_SPANISH" />
+                <ScalarProperty Name="DATACREATE" ColumnName="DATACREATE" />
+                <ScalarProperty Name="ORDER" ColumnName="ORDER" />
+                <ScalarProperty Name="CLASSICON" ColumnName="CLASSICON" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="URLDASHBOARD" ColumnName="URLDASHBOARD" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="TxModuloCod" ColumnName="TxModuloCod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAMNUMENUUSUARIO">
+            <EntityTypeMapping TypeName="Model.INFRAMNUMENUUSUARIO">
+              <MappingFragment StoreEntitySet="INFRAMNUMENUUSUARIO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USUARIOID" ColumnName="USUARIOID" />
+                <ScalarProperty Name="MENUID" ColumnName="MENUID" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAUSUARIO">
+            <EntityTypeMapping TypeName="Model.INFRAUSUARIO">
+              <MappingFragment StoreEntitySet="INFRAUSUARIO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="DATACRIACAO" ColumnName="DATACRIACAO" />
+                <ScalarProperty Name="DATAULTIMOACESSO" ColumnName="DATAULTIMOACESSO" />
+                <ScalarProperty Name="IS_BLOQUEADO" ColumnName="IS_BLOQUEADO" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="USEROUTSYSTEMSID" ColumnName="USEROUTSYSTEMSID" />
+                <ScalarProperty Name="IDIOMAID" ColumnName="IDIOMAID" />
+                <ScalarProperty Name="INFRACONFIGLDAP" ColumnName="INFRACONFIGLDAP" />
+                <ScalarProperty Name="LASTLOGESTABID" ColumnName="LASTLOGESTABID" />
+                <ScalarProperty Name="LASTLOGSPRINT" ColumnName="LASTLOGSPRINT" />
+                <ScalarProperty Name="READLASTSPRINT" ColumnName="READLASTSPRINT" />
+                <ScalarProperty Name="USAERP" ColumnName="USAERP" />
+                <ScalarProperty Name="FORCE_PSWCHANGE" ColumnName="FORCE_PSWCHANGE" />
+                <ScalarProperty Name="USACHAT" ColumnName="USACHAT" />
+                <ScalarProperty Name="SENHAHASH512" ColumnName="SENHAHASH512" />
+                <ScalarProperty Name="TxCPF" ColumnName="TxCPF" />
+                <ScalarProperty Name="DtHoraValidadeLogin" ColumnName="DtHoraValidadeLogin" />
+                <ScalarProperty Name="Is_Externo" ColumnName="Is_Externo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAUSUARIOSENHASLOG">
+            <EntityTypeMapping TypeName="Model.INFRAUSUARIOSENHASLOG">
+              <MappingFragment StoreEntitySet="INFRAUSUARIOSENHASLOG">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+                <ScalarProperty Name="INFRAUSUARIOID" ColumnName="INFRAUSUARIOID" />
+                <ScalarProperty Name="DATETIME" ColumnName="DATETIME" />
+                <ScalarProperty Name="IS_EFFECTIVE" ColumnName="IS_EFFECTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loc_Aluguel">
+            <EntityTypeMapping TypeName="Model.Loc_Aluguel">
+              <MappingFragment StoreEntitySet="Loc_Aluguel">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Loc_ClienteId" ColumnName="Loc_ClienteId" />
+                <ScalarProperty Name="Loc_FuncionarioId" ColumnName="Loc_FuncionarioId" />
+                <ScalarProperty Name="Loc_VeiculoId" ColumnName="Loc_VeiculoId" />
+                <ScalarProperty Name="DtRetirada" ColumnName="DtRetirada" />
+                <ScalarProperty Name="DtEntregaPrevista" ColumnName="DtEntregaPrevista" />
+                <ScalarProperty Name="DtEntregaEfetiva" ColumnName="DtEntregaEfetiva" />
+                <ScalarProperty Name="ValorPrevisto" ColumnName="ValorPrevisto" />
+                <ScalarProperty Name="ValorFinal" ColumnName="ValorFinal" />
+                <ScalarProperty Name="ValorMulta" ColumnName="ValorMulta" />
+                <ScalarProperty Name="ValorDesconto" ColumnName="ValorDesconto" />
+                <ScalarProperty Name="Is_Encerrado" ColumnName="Is_Encerrado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loc_Cliente">
+            <EntityTypeMapping TypeName="Model.Loc_Cliente">
+              <MappingFragment StoreEntitySet="Loc_Cliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="RG" ColumnName="RG" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Is_Especial" ColumnName="Is_Especial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loc_EnderecoCliente">
+            <EntityTypeMapping TypeName="Model.Loc_EnderecoCliente">
+              <MappingFragment StoreEntitySet="Loc_EnderecoCliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Logradouro" ColumnName="Logradouro" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Bairro" ColumnName="Bairro" />
+                <ScalarProperty Name="Complemento" ColumnName="Complemento" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="EstadoUF" ColumnName="EstadoUF" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Loc_ClienteId" ColumnName="Loc_ClienteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loc_Funcionario">
+            <EntityTypeMapping TypeName="Model.Loc_Funcionario">
+              <MappingFragment StoreEntitySet="Loc_Funcionario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loc_Marca">
+            <EntityTypeMapping TypeName="Model.Loc_Marca">
+              <MappingFragment StoreEntitySet="Loc_Marca">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loc_TipoVeiculo">
+            <EntityTypeMapping TypeName="Model.Loc_TipoVeiculo">
+              <MappingFragment StoreEntitySet="Loc_TipoVeiculo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Loc_Veiculo">
+            <EntityTypeMapping TypeName="Model.Loc_Veiculo">
+              <MappingFragment StoreEntitySet="Loc_Veiculo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="MarcaId" ColumnName="MarcaId" />
+                <ScalarProperty Name="Ano" ColumnName="Ano" />
+                <ScalarProperty Name="Cor" ColumnName="Cor" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="Quilometragem" ColumnName="Quilometragem" />
+                <ScalarProperty Name="ValorDiaria" ColumnName="ValorDiaria" />
+                <ScalarProperty Name="Is_Disponivel" ColumnName="Is_Disponivel" />
+                <ScalarProperty Name="TipoVeiculoId" ColumnName="TipoVeiculoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OSSYS_TENANT">
+            <EntityTypeMapping TypeName="Model.OSSYS_TENANT">
+              <MappingFragment StoreEntitySet="OSSYS_TENANT">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRPGRUPO">
+            <EntityTypeMapping TypeName="Model.CRPGRUPO">
+              <MappingFragment StoreEntitySet="CRPGRUPO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="IDCRPGRUPO" ColumnName="IDCRPGRUPO" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ISGRUPOFINAL" ColumnName="ISGRUPOFINAL" />
+                <ScalarProperty Name="NUMERONIVEL" ColumnName="NUMERONIVEL" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="IS_CATALOGO" ColumnName="IS_CATALOGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAAUTHENTICATION">
+            <EntityTypeMapping TypeName="Model.INFRAAUTHENTICATION">
+              <MappingFragment StoreEntitySet="INFRAAUTHENTICATION">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="INFRAINAUTHTYPEID" ColumnName="INFRAINAUTHTYPEID" />
+                <ScalarProperty Name="IS_2FAENABLED" ColumnName="IS_2FAENABLED" />
+                <ScalarProperty Name="INFRAIN2FATYPEID" ColumnName="INFRAIN2FATYPEID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAEMAILCFG">
+            <EntityTypeMapping TypeName="Model.INFRAEMAILCFG">
+              <MappingFragment StoreEntitySet="INFRAEMAILCFG">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SMTPSERVER" ColumnName="SMTPSERVER" />
+                <ScalarProperty Name="SMTPPORT" ColumnName="SMTPPORT" />
+                <ScalarProperty Name="TIMEOUT" ColumnName="TIMEOUT" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="NOMEREMET" ColumnName="NOMEREMET" />
+                <ScalarProperty Name="EMAILADRESS" ColumnName="EMAILADRESS" />
+                <ScalarProperty Name="IS_SSL" ColumnName="IS_SSL" />
+                <ScalarProperty Name="IS_TLS" ColumnName="IS_TLS" />
+                <ScalarProperty Name="IS_AUTHENTICATED" ColumnName="IS_AUTHENTICATED" />
+                <ScalarProperty Name="CONFIRMLEIT" ColumnName="CONFIRMLEIT" />
+                <ScalarProperty Name="CONFIRMENTREG" ColumnName="CONFIRMENTREG" />
+                <ScalarProperty Name="IMAPSERVER" ColumnName="IMAPSERVER" />
+                <ScalarProperty Name="IMAPPORT" ColumnName="IMAPPORT" />
+                <ScalarProperty Name="INFRAESTABID" ColumnName="INFRAESTABID" />
+                <ScalarProperty Name="PASSWORD_ANG" ColumnName="PASSWORD_ANG" />
+                <ScalarProperty Name="URLSERVIDOR" ColumnName="URLSERVIDOR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAGRUPO">
+            <EntityTypeMapping TypeName="Model.INFRAGRUPO">
+              <MappingFragment StoreEntitySet="INFRAGRUPO">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAIN2FATYPE">
+            <EntityTypeMapping TypeName="Model.INFRAIN2FATYPE">
+              <MappingFragment StoreEntitySet="INFRAIN2FATYPE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="ORDEM" ColumnName="ORDEM" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAINAUTHTYPE">
+            <EntityTypeMapping TypeName="Model.INFRAINAUTHTYPE">
+              <MappingFragment StoreEntitySet="INFRAINAUTHTYPE">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="CODIGO" ColumnName="CODIGO" />
+                <ScalarProperty Name="ORDEM" ColumnName="ORDEM" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfraLogRecupSenha">
+            <EntityTypeMapping TypeName="Model.InfraLogRecupSenha">
+              <MappingFragment StoreEntitySet="InfraLogRecupSenha">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="INFRAUSUARIOID" ColumnName="INFRAUSUARIOID" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="DTALTERACAO" ColumnName="DTALTERACAO" />
+                <ScalarProperty Name="DTSOLICITACAO" ColumnName="DTSOLICITACAO" />
+                <ScalarProperty Name="IS_EFETIVADO" ColumnName="IS_EFETIVADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRASEGCONFIG">
+            <EntityTypeMapping TypeName="Model.INFRASEGCONFIG">
+              <MappingFragment StoreEntitySet="INFRASEGCONFIG">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IS_LETRASMAIUSCULAS" ColumnName="IS_LETRASMAIUSCULAS" />
+                <ScalarProperty Name="IS_NUMEROS" ColumnName="IS_NUMEROS" />
+                <ScalarProperty Name="IS_CARACTERESESPECIAIS" ColumnName="IS_CARACTERESESPECIAIS" />
+                <ScalarProperty Name="QTNINATIVIDADE" ColumnName="QTNINATIVIDADE" />
+                <ScalarProperty Name="QTNTROCASENHA" ColumnName="QTNTROCASENHA" />
+                <ScalarProperty Name="QTNTENTATIVA" ColumnName="QTNTENTATIVA" />
+                <ScalarProperty Name="QTNREPETICAO" ColumnName="QTNREPETICAO" />
+                <ScalarProperty Name="QTNMINIMA" ColumnName="QTNMINIMA" />
+                <ScalarProperty Name="IS_DROPSESSION" ColumnName="IS_DROPSESSION" />
+                <ScalarProperty Name="LEVEL" ColumnName="LEVEL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAUSUARIO_IMG">
+            <EntityTypeMapping TypeName="Model.INFRAUSUARIO_IMG">
+              <MappingFragment StoreEntitySet="INFRAUSUARIO_IMG">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IMAGEM" ColumnName="IMAGEM" />
+                <ScalarProperty Name="FILENAME" ColumnName="FILENAME" />
+                <ScalarProperty Name="DATACRIACAO" ColumnName="DATACRIACAO" />
+                <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+                <ScalarProperty Name="USUARIOID" ColumnName="USUARIOID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INFRAUSUARIOLOG1">
+            <EntityTypeMapping TypeName="Model.INFRAUSUARIOLOG1">
+              <MappingFragment StoreEntitySet="INFRAUSUARIOLOG1">
+                <ScalarProperty Name="TENANT_ID" ColumnName="TENANT_ID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="INFRAUSUARIOID" ColumnName="INFRAUSUARIOID" />
+                <ScalarProperty Name="DATETIME" ColumnName="DATETIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

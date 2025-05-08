@@ -16,12 +16,11 @@ namespace EntityFrameworkStudyTerminal
             DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { @"C:\projetos\EntityFrameworkStudy\EntityFrameworkStudyTerminal\EntityFrameworkStudyTerminal\.env" }));
 
             string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-            string connectionString2 = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING_PROD");
             Console.WriteLine(connectionString);
 
 
             // Inicialização de conexão
-            MyDbContext context = new MyDbContext(connectionString2);
+            MyDbContext context = new MyDbContext(connectionString);
 
 
             UsuarioMethods usuarioMethods = new UsuarioMethods(context);
