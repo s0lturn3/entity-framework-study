@@ -1,10 +1,6 @@
-﻿using System;
-
-using dotenv.net;
-
-using EntityFrameworkStudyLogic.Connection;
+﻿using EntityFrameworkStudyDatabase.Database;
 using EntityFrameworkStudyLogic.Methods;
-using EntityFrameworkStudyLogic.Models;
+using System;
 
 namespace EntityFrameworkStudyTerminal
 {
@@ -12,20 +8,55 @@ namespace EntityFrameworkStudyTerminal
     {
         static void Main(string[] args)
         {
-            // Leitura de variáveis de ambiente
-            DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { @"C:\projetos\EntityFrameworkStudy\EntityFrameworkStudyTerminal\EntityFrameworkStudyTerminal\.env" }));
+            UsuarioMethods usuarioMethods = new UsuarioMethods();
 
-            string connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-            Console.WriteLine(connectionString);
+            Console.WriteLine("Operações de usuário:");
+            Console.WriteLine($@"1. READ
+2. CREATE
+3. UPDATE
+4. DELETE");
+            Console.WriteLine();
 
+            int opt = Convert.ToInt32(Console.ReadLine());
 
-            // Inicialização de conexão
-            MyDbContext context = new MyDbContext(connectionString);
+            switch(opt)
+            {
+                case 1: // LEITURA
+                    usuarioMethods.GetAll();
+                    break;
 
+                case 2: // CRIAÇÃO
+                    usuarioMethods.Create(new INFRAUSUARIO
+                    {
+                        TENANT_ID = 0,
+                        USUARIO = "EF6",
+                        NOME = "Erick (EntityFramework)",
+                        DATACRIACAO = DateTime.Now,
+                        EMAIL = "ecoliveira@sispro.com.br",
+                        IS_ACTIVE = true,
+                        SENHAHASH512 = "EF6"
+                    });
+                    break;
 
-            UsuarioMethods usuarioMethods = new UsuarioMethods(context);
+                case 3: // ATUALIZAÇÃO
+                    usuarioMethods.Update(new INFRAUSUARIO
+                    {
+                        ID = "",
+                        USUARIO = "EF6  _",
+                        NOME = "Erick (EntityFramework)  _",
+                        DATAULTIMOACESSO = DateTime.Now,
+                        EMAIL = "ecoliveira@sispro.com.br  _",
+                        IS_ACTIVE = true,
+                        SENHAHASH512 = "EF6  _"
+                    });
+                    break;
 
-            UsuarioRecord record = usuarioMethods.Get("");
+                case 4: // EXCLUSÃO
+                    usuarioMethods.Delete(new INFRAUSUARIO { ID = "" });
+                    break;
+            }
+
+            Console.ReadKey();
         }
     }
 }

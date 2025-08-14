@@ -36,6 +36,9 @@
     <Reference Include="dotenv.net, Version=3.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\dotenv.net.3.2.1\lib\netstandard2.0\dotenv.net.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFrameworkStudyDatabase">
+      <HintPath>..\..\EntityFrameworkStudyDatabase\bin\Debug\EntityFrameworkStudyDatabase.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFrameworkStudyLogic">
       <HintPath>..\..\EntityFrameworkStudyLogic\bin\Debug\EntityFrameworkStudyLogic.dll</HintPath>
     </Reference>

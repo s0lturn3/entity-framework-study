@@ -1,6 +1,7 @@
-**/packages/
+**/.vs
+**/packages
 
-**/[Oo]bj/
-**/[Dd]ebug/
+**/[Oo]bj
+**/[Dd]ebug
 
 *.env

@@ -1,79 +1,62 @@
 ﻿using System;
 using System.Linq;
-using EntityFrameworkStudyLogic.Connection;
-using EntityFrameworkStudyLogic.Models;
+
+using EntityFrameworkStudyDatabase.Database;
 
 namespace EntityFrameworkStudyLogic.Methods
 {
     public class UsuarioMethods
     {
 
-        private readonly MyDbContext _context;
+        private readonly ESTAGIOEntities _context;
 
-        public UsuarioMethods(MyDbContext context)
+        public UsuarioMethods()
         {
-            _context = context;
+            _context = new ESTAGIOEntities();
         }
 
 
 
-        public void BasicCRUD()
+        public INFRAUSUARIO Get(string id)
         {
-            // CREATE
-            var novo = new UsuarioRecord { Id = Guid.NewGuid().ToString(), Tenant_Id = 1579, Nome = "Fulano", Email = "fulano@email.com" };
-            _context.Usuarios.Add(novo);
-            _context.SaveChanges();
-
-            // READ
-            UsuarioRecord usuario = _context.Usuarios.FirstOrDefault(u => u.Id == "");
-
-            // UPDATE
-            if (usuario != null)
-            {
-                usuario.Nome = "Novo Nome";
-                _context.SaveChanges();
-            }
-
-            // DELETE
-            if (usuario != null)
-            {
-                _context.Usuarios.Remove(usuario);
-                _context.SaveChanges();
-            }
-        }
-
-
-
-        public UsuarioRecord Get(string id)
-        {
-            UsuarioRecord usuario = _context.Usuarios.FirstOrDefault(u => u.Id == id);
+            INFRAUSUARIO usuario = _context.INFRAUSUARIO.FirstOrDefault(u => u.ID == id);
             return usuario;
         }
 
-        public string Create(UsuarioRecord record)
+        public dynamic GetAll()
         {
-            record.Id = Guid.NewGuid().ToString();
+            foreach (INFRAUSUARIO usuario in _context.INFRAUSUARIO)
+            {
+                Console.WriteLine("{0}\t{1}\t{2}", usuario.ID, usuario.NOME, usuario.SENHAHASH512);
+            }
 
-            _context.Usuarios.Add(record);
-            _context.SaveChanges();
-
-            return record.Id;
+            return 0;
         }
 
-        public void Update(UsuarioRecord record)
+        public string Create(INFRAUSUARIO record)
+        {
+            record.ID = Guid.NewGuid().ToString();
+
+            _context.INFRAUSUARIO.Add(record);
+            _context.SaveChanges();
+
+            return record.ID;
+        }
+
+        public void Update(INFRAUSUARIO record)
         {
             if (record != null)
             {
-                record.Id = record.Id;
+                record.ID = record.ID;
                 _context.SaveChanges();
             }
         }
 
-        public void Delete(UsuarioRecord record)
+        public void Delete(INFRAUSUARIO record)
         {
             if (record != null)
             {
-                _context.Usuarios.Remove(record);
+                _context.INFRAUSUARIO.Remove(record);
                 _context.SaveChanges();
             }
         }
